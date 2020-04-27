@@ -30,11 +30,14 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    bio: DataTypes.TEXT,
+    occupation: DataTypes.TEXT,
     username: DataTypes.STRING,
     birthday: DataTypes.DATE,
     admin: DataTypes.BOOLEAN,
     pic: DataTypes.STRING,
+    address: DataTypes.TEXT,
+    city: DataTypes.TEXT,
+    state: DataTypes.TEXT,
     zipcode: DataTypes.INTEGER
   }, {
     hooks: {

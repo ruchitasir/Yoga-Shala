@@ -1,14 +1,14 @@
 {
   "development": {
   
-    "database": "auth-sei30",
+    "database": "yog-shala-db",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "operatorsAliases": "false"
   },
  
   "production": {
-      "dialect": "postgres",
-    "operatorsAliases": "false"
+  "dialect": "postgres",
+  "operatorsAliases": "false"
   }
 }

@@ -21,7 +21,7 @@ module.exports = {
       password: {
         type: Sequelize.STRING
       },
-      bio: {
+      occupation: {
         type: Sequelize.TEXT
       },
       username: {
@@ -37,6 +37,15 @@ module.exports = {
       pic:{
         type: Sequelize.STRING,
         defaultValue:'http://placekitten.com/200/200'
+      },
+      address:{
+        type: Sequelize.TEXT
+      },
+      city:{
+        type: Sequelize.TEXT
+      },
+      state:{
+        type: Sequelize.TEXT
       },
       zipcode: {
         type: Sequelize.INTEGER
