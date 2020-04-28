@@ -25,12 +25,11 @@ function timeslot(){
   endtimeSlots.push('22:00')
   return {starttimeSlots: starttimeSlots, endtimeSlots: endtimeSlots}
 }
-//GET /auth/login
+
+
 router.get('/new',(req,res)=>{
   let timeSlot = timeslot()
-  //console.log("start time: ",timeSlot.starttimeSlots)
-  //console.log("end time: ",timeSlot.endtimeSlots)
-    db.instructor.findAll()
+     db.instructor.findAll()
     .then(instructors=>{
         db.location.findAll()
         .then(locations=>{
@@ -49,7 +48,7 @@ router.get('/new',(req,res)=>{
 
 
 router.post('/show',(req,res)=>{
-  console.log(req.body)
+  //console.log(req.body)
   db.classevent.findOrCreate({
     where: {
       classdate: req.body.classdate,
@@ -89,8 +88,7 @@ router.get('/show',(req,res)=>{
 router.get('/schedule',(req,res)=>{
   const Op = Sequelize.Op
  let today = new Date();
- var in_four_weeks = new Date((today.getTime() + (30*24*60*60*1000)))
-// var temp = new Date((today.getTime() + (15*24*60*60*1000)))
+ let in_four_weeks = new Date((today.getTime() + (30*24*60*60*1000)))
  console.log('today ',today.toDateString(),' in_four_weeks ',in_four_weeks)
   db.classevent.findAll({
     where: {classdate: { [Op.between] : [ today, in_four_weeks ] } },
@@ -115,7 +113,7 @@ router.get('/schedule',(req,res)=>{
 router.get('/registerclass',(req,res)=>{
   const Op = Sequelize.Op
   let today = new Date();
- var in_four_weeks = new Date((today.getTime() + (30*24*60*60*1000)))
+  let in_four_weeks = new Date((today.getTime() + (30*24*60*60*1000)))
   db.classevent.findAll({
     where: {classdate: { [Op.between] : [ today, in_four_weeks ] } },
     order: [['classdate','ASC'],['starttime','ASC']],
@@ -134,6 +132,32 @@ router.get('/registerclass',(req,res)=>{
     res.render('error')
   })
 
+})
+
+router.post('/userclass',(req,res)=>{
+  console.log(req.body)
+  db.classevent.findOne({
+    where: {id: req.body.id}
+  })
+  .then(cl=>{
+    cl.addUser(req.body.userId)
+      .then(()=>{
+          res.redirect('/class/userclass')
+      })
+      .catch(err=>{
+        console.log(err)
+        res.render('error')
+      })
+  })
+  .catch(err=>{
+    console.log(err)
+    res.render('error')
+  })
+})
+
+router.get('/userclass',(req,res)=>{
+
+  res.render('class/userclass')
 })
 
 //Export (allow me to include this in another page)

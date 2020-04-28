@@ -1,2 +1,41 @@
-<h1>All classes by categories</h1>
+<h1>Regiter for all classes</h1>
 
+
+<table class="responsive-table striped ">
+    <thead>
+      <tr>
+          <th>Class Name and Type</th>
+          <th>Date</th>
+          <th>Timings</th>
+          <th>Instructor</th>
+          <th>Location</th>
+          <th>Price</th>
+          <th>Register</th>
+      </tr>
+    </thead>
+    <tbody>
+     <%   classes.forEach(cl=>{ %>  
+        <% let res = cl.starttime.split(":")[0] %>    
+        <% let str = "am"; if(res >=12) { str = "pm" }%> 
+        <% let res1 = cl.endtime.split(":")[0] %>    
+        <% let str1 = "am"; if(res1 >=12) { str1 = "pm" }%>  
+        <tr>
+            <td><%=cl.classname%>,  <%=cl.classtype%></td>
+            <td><%=cl.classdate.toDateString()%></td>
+            <td><%=cl.starttime+" "+str+"-"%><%=cl.endtime+" "+str1%></td>
+            <td> <%=cl.instructor.firstname %>  <%=cl.instructor.lastname%></td>
+            <td><%=cl.location.centername%></td>
+            <td><%  %></td>
+            <td>
+                <form  method="POST" action="/class/userclass">
+                    <input id="classid" type="hidden" name="id" value="<%=cl.id%>">
+                    <input id="userid" type="hidden" name="userId" value="<%=user.id%>">
+                    <button class="btn waves-effect waves-light pink lighten-3" type="submit"> Register
+                        <i class="material-icons right">send</i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+      <% }) %> 
+    </tbody>
+  </table>
