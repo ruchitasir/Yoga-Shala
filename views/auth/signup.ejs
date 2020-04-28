@@ -13,9 +13,13 @@
             </div>
         </div>
         <div class="row">
-            <div class="input-field col s12">
+            <div class="input-field col s6">
                 <input id="email" type="email" name="email" value="<%=data.email %>">
                 <label for="email">Email</label>
+            </div>
+            <div class="input-field col s6">    
+                <input id="username" type="text" name="username" value="<%=data.username %>">
+                <label for="username">Display Username</label>
             </div>
         </div>
         <div class="row">
@@ -30,33 +34,42 @@
         </div>
         <div class="row">
             <div class="input-field col s4">    
-                <input id="username" type="text" name="username" value="<%=data.username %>">
-                <label for="username">Display Username</label>
+                <input id="address" type="text" name="address" value="<%=data.address %>">
+                <label for="address">Address</label>
+            </div>
+            <div class="input-field col s4">    
+                <input id="city" type="text" name="city" value="<%=data.city %>">
+                <label for="city">City</label>
             </div>
             <div class="input-field col s4">    
                 <input id="zipcode" type="number" name="zipcode" value="<%=data.zipcode %>">
                 <label for="zipcode">Zipcode</label>
             </div>
-            <div class="input-field col s4">    
-                <input id="birthday" type="text" name="birthday" class="datepicker" value="<%=data.birthday %>">
-                <label for="birthday">Birthday</label>
-            </div>
+            
         </div>
         <div class="row">
-            <div class="input-field col s12">
+            <div class="input-field col s6">
+                <input id="state" type="text" name="state" value="<%=data.state %>">
+                <label for="state">State</label>
+            </div>
+            <div class="input-field col s6">
                 <input id="pic" type="url" name="pic" value="<%=data.pic %>">
                 <label for="pic">Picture URL</label>
             </div>
         </div>
 
         <div class="row">
-            <div class="input-field col s12">
-                <textarea id="bio" name="bio" class="materialize-textarea"><%=data.bio %></textarea>
-                <label for="bio">Bio</label>
+            <div class="input-field col s6">
+                <textarea id="occupation" name="occupation" class="materialize-textarea"><%=data.occupation %></textarea>
+                <label for="occupation">Occupation</label>
+            </div>
+            <div class="input-field col s6">    
+                <input id="birthday" type="text" name="birthday" class="datepicker" value="<%=data.birthday %>">
+                <label for="birthday">Birthday</label>
             </div>
         </div>
 
-        <button class="btn waves-effect waves-light indigo lighten-3" type="submit"> Signup
+        <button class="btn waves-effect waves-light pink lighten-3" type="submit"> Signup
             <i class="material-icons right">send</i>
         </button>
     </form>

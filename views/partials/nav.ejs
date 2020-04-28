@@ -1,36 +1,46 @@
 <nav>
-    <div class="nav-wrapper indigo lighten-3">
-      <a href="#" class="brand-logo">Logo</a>
+   
+    <div class="nav-wrapper pink lighten-5">
+      <a class="grey-text text-darken-1" href="/" class="brand-logo"> <strong> Yoga Shala </strong></a>
       <a href="#" data-target="mobile-demo" class="sidenav-trigger">
           <i class="material-icons">menu</i>
      </a>
+    
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-            
         <li>
-            <a href="/">Home</a>
+            <a class="grey-text text-darken-3" href="/">Home</a>
+        </li>
+        <li>
+            <a class="grey-text text-darken-3" href="/class/show">Show Classes</a>
         </li>
          <%if (user) {  %>
                 <li>
                     <strong> Hi, <%=user.firstname%></strong> 
                 </li>
-                <li>
-                    <a href="/profile/user">Profile Page</a>
-                </li>
+               
                 <% if (user.admin) { %>
                     <li>
-                        <a href="/profile/admin">Admin Page</a>
+                        <a class="grey-text text-darken-3" href="/profile/admin">Admin Page</a>
                     </li>
-                <% } %> 
+                    <li>
+                        <a class="grey-text text-darken-3" href="/class/new">Add New Class</a>
+                    </li>
+                   
+                <% } else { %> 
+                    <li>
+                        <a class="grey-text text-darken-3" href="/profile/user">Profile Page</a>
+                    </li>
+                <% } %>   
                 <li>
-                    <a href="/auth/logout">Logout</a>
+                    <a class="grey-text text-darken-3" href="/auth/logout">Logout</a>
                     
                 </li>
          <% } else { %>     
                 <li>
-                    <a href="/auth/login">Login</a>
+                    <a class="grey-text text-darken-3" href="/auth/login">Login</a>
                 </li>
                 <li>
-                    <a href="/auth/signup">Sign Up</a>
+                    <a class="grey-text text-darken-3" href="/auth/signup">Sign Up</a>
                 </li>
         <% } %> 
       </ul>
@@ -39,30 +49,37 @@
 
   <ul class="sidenav" id="mobile-demo">
     <li>
-        <a href="/">Home</a>
+        <a class="grey-text text-darken-3" href="/">Home</a>
+    </li>
+    <li>
+        <a class="grey-text text-darken-3" href="/class/show">Show Classes</a>
     </li>
     <%if (user) {  %>
-            <li>
-                <a href="/profile/user">Profile Page</a>
-            </li>
             <% if (user.admin) { %>
                 <li>
-                    <a href="/profile/admin">Admin Page</a>
+                    <a class="grey-text text-darken-3" href="/profile/admin">Admin Page</a>
                 </li>
-            <% } %> 
+                <li>
+                    <a class="grey-text text-darken-3" href="/class/new">Add New Class</a>
+                </li>
+            <% } else {%> 
+                <li>
+                    <a class="grey-text text-darken-3" href="/profile/user">Profile Page</a>
+                </li>
+            <% } %>     
             <li>
-                <a href="/auth/logout">Logout</a>
+                <a class="grey-text text-darken-3" href="/auth/logout">Logout</a>
             </li>
      <% } else { %>     
             <li>
-                <a href="/auth/login">Login</a>
+                <a class="grey-text text-darken-3" href="/auth/login">Login</a>
             </li>
             <li>
-                <a href="/auth/signup">Sign Up</a>
+                <a class="grey-text text-darken-3" href="/auth/signup">Sign Up</a>
             </li>
     <% } %> 
   </ul>
          
-        
+   
 
 

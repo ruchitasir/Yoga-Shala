@@ -58,6 +58,7 @@ app.use((req,res,next)=>{
 //Controllers
 app.use('/auth',require('./controllers/auth'))
 app.use('/profile',require('./controllers/profile'))
+app.use('/class',require('./controllers/class'))
 
 // create a home page
 app.get('/',(req,res)=>{
