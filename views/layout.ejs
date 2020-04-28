@@ -25,6 +25,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         var elems = document.querySelectorAll('.sidenav');
         var instances = M.Sidenav.init(elems, {});
+
         var startDate = new Date()
         startDate.setFullYear(startDate.getFullYear() - 30)
         var elems2 = document.querySelectorAll('.datepicker')
@@ -35,8 +36,18 @@
             yearRange: 50,
             maxDate: (new Date())
         })
+        var currentDate = new Date()
+        var elems4 = document.querySelectorAll('.dateCurrent')
+        var instances4 = M.Datepicker.init(elems4, {
+            autoClose: true,
+            defaultDate: currentDate,
+            setDefaultDate: true,
+            yearRange: 50
+        })
+
         var elems3 = document.querySelectorAll('select');
         var instances3 = M.FormSelect.init(elems3, {});
+
     });
 
 </script>

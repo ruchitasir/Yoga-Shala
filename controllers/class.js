@@ -2,6 +2,8 @@
 let router = require('express').Router();
 let db = require('../models')
 let passport = require('../config/passportConfig')
+let Sequelize = require('sequelize')
+
 
 function timeslot(){
   let starttimeSlots =[];
@@ -48,7 +50,90 @@ router.get('/new',(req,res)=>{
 
 router.post('/show',(req,res)=>{
   console.log(req.body)
-  res.render('class/show')
+  db.classevent.findOrCreate({
+    where: {
+      classdate: req.body.classdate,
+      starttime: req.body.starttime,
+      endtime: req.body.endtime,
+      instructorId: req.body.instructorId
+    },
+      defaults: req.body
+  })
+  .then(([classes,created])=>{
+    res.redirect('/class/show')
+  })
+  .catch(err=>{
+    console.log(err)
+    res.render('error')
+  })
+  
+})
+
+router.get('/show',(req,res)=>{
+
+  db.classevent.findAll({
+    order: [['classdate','ASC']],
+    include: [ db.instructor, db.location]
+  })
+  .then(classes=>{
+    res.render('class/show',{classes})
+  })
+  .catch(err=>{
+    console.log(err)
+    res.render('error')
+  })
+
+})
+
+
+router.get('/schedule',(req,res)=>{
+  const Op = Sequelize.Op
+ let today = new Date();
+ var in_four_weeks = new Date((today.getTime() + (30*24*60*60*1000)))
+// var temp = new Date((today.getTime() + (15*24*60*60*1000)))
+ console.log('today ',today.toDateString(),' in_four_weeks ',in_four_weeks)
+  db.classevent.findAll({
+    where: {classdate: { [Op.between] : [ today, in_four_weeks ] } },
+    order: [['classdate','ASC'],['starttime','ASC']],
+    include: [ db.instructor, db.location]
+  })
+  .then(classes=>{
+    console.log('classes:',classes)
+    let msg = false;
+    if(Object.keys(classes).length){
+       msg = true;
+    }
+    res.render('class/showclass',{classes, msg})
+  })
+  .catch(err=>{
+    console.log(err)
+    res.render('error')
+  })
+
+})
+
+router.get('/registerclass',(req,res)=>{
+  const Op = Sequelize.Op
+  let today = new Date();
+ var in_four_weeks = new Date((today.getTime() + (30*24*60*60*1000)))
+  db.classevent.findAll({
+    where: {classdate: { [Op.between] : [ today, in_four_weeks ] } },
+    order: [['classdate','ASC'],['starttime','ASC']],
+    include: [ db.instructor, db.location]
+  })
+  .then(classes=>{
+    console.log('classes:',classes)
+    let msg = false;
+    if(Object.keys(classes).length){
+       msg = true;
+    }
+    res.render('class/registerclass',{classes, msg})
+  })
+  .catch(err=>{
+    console.log(err)
+    res.render('error')
+  })
+
 })
 
 //Export (allow me to include this in another page)

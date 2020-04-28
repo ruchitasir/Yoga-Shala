@@ -11,7 +11,7 @@
             <a class="grey-text text-darken-3" href="/">Home</a>
         </li>
         <li>
-            <a class="grey-text text-darken-3" href="/class/show">Show Classes</a>
+            <a class="grey-text text-darken-3" href="/class/schedule">Class Schedule</a>
         </li>
          <%if (user) {  %>
                 <li>
@@ -25,7 +25,9 @@
                     <li>
                         <a class="grey-text text-darken-3" href="/class/new">Add New Class</a>
                     </li>
-                   
+                    <li>
+                        <a class="grey-text text-darken-3" href="/class/show">Show All Classes</a>
+                    </li>
                 <% } else { %> 
                     <li>
                         <a class="grey-text text-darken-3" href="/profile/user">Profile Page</a>
@@ -52,7 +54,7 @@
         <a class="grey-text text-darken-3" href="/">Home</a>
     </li>
     <li>
-        <a class="grey-text text-darken-3" href="/class/show">Show Classes</a>
+        <a class="grey-text text-darken-3" href="/class/schedule">Class Schedule</a>
     </li>
     <%if (user) {  %>
             <% if (user.admin) { %>
@@ -61,6 +63,9 @@
                 </li>
                 <li>
                     <a class="grey-text text-darken-3" href="/class/new">Add New Class</a>
+                </li>
+                <li>
+                    <a class="grey-text text-darken-3" href="/class/show">Show All Classes</a>
                 </li>
             <% } else {%> 
                 <li>
