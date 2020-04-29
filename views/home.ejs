@@ -1,5 +1,7 @@
 <header class="w3-display-container w3-content w3-wide" style="max-width:1600px;min-width:500px" id="home">
+    <div class="w3-panel w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border-pale-red w3-pale-red w3-round-xlarge">
     <img class="w3-image" src="/image/program-6.jpg" alt="Hamburger Catering" width="1600" height="800">
+   </div>
     <div class="w3-display-bottomleft w3-padding-large w3-opacity">
       <h1 class="w3-xxlarge">Yoga Shala</h1>
     </div>
@@ -22,19 +24,33 @@
         <p class="w3-large w3-text-grey w3-hide-medium">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
       </div>
     </div>
-  <hr>
-     
 
-<div class="w3-content" style="max-width:400px">
-  <% poses.forEach(p=>{ %>
-    <div class="mySlides w3-container w3-white w3-card-4">
-      <p><span class="w3-tag w3-pink"><%=p.sanskrit_name%></span>
-      <h1><b><%=p.english_name%>  </b></h1>
-      <h1><i></i></h1>
-      <img  src="<%=p.img_url%>"  style="width:100%">
-    </div>
-  <% }) %> 
-</div>
+  <hr>
+   <div class= "w3-row w3-pale-red">
+      <div class="w3-quarter w3-container ">
+        <h2><%=poses[4].english_name%></h2>
+        <img class="w3-animate-fading" src="<%=poses[4].img_url%>" alt="<%=poses[4].english_name%>"  style="width:100%">
+      </div> 
+      <div class="w3-half w3-container ">
+        <div class="w3-content" style="max-width:400px">
+          <% poses.forEach(p=>{ %>
+            <div class="mySlides w3-container w3-white w3-card-4">
+              <h1><b><%=p.english_name%>  </b></h1>
+      
+              <h3><i class="w3-tag w3-pale-red"><%=p.sanskrit_name%></i></h3>
+              <img  src="<%=p.img_url%>"  alt="<%=p.english_name%>" style="width:100%">
+            </div>
+          <% }) %> 
+        </div>
+      </div>
+      <div class="w3-quarter w3-container ">
+        <h2><%=poses[2].english_name%></h2>
+        <img class="w3-animate-fading" src="<%=poses[2].img_url%>" alt="<%=poses[2].english_name%>"  style="width:100%">
+      </div>
+   </div>  
+
+
+
 
 <script>
 var slideIndex = 0;
@@ -49,7 +65,7 @@ function carousel() {
   slideIndex++;
   if (slideIndex > x.length) {slideIndex = 1} 
   x[slideIndex-1].style.display = "block"; 
-  setTimeout(carousel, 2000); 
+  setTimeout(carousel, 3000); 
 }
 </script>
       
@@ -75,7 +91,7 @@ function carousel() {
       </div>
       
       <div class="w3-col l6 w3-padding-large">
-        <img src="/w3images/tablesetting.jpg" class="w3-round w3-image w3-opacity-min" alt="Menu" style="width:100%">
+        <img src="/image/intro.jpg" class="w3-round w3-image w3-opacity-min" alt="Menu" style="width:100%">
       </div>
     </div>
   
