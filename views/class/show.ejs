@@ -1,47 +1,48 @@
 <h1>Show all Classes</h1>
 
-<%   classes.forEach(cl=>{ %>
- <p> <%=cl.classname %></p>
-<%=cl.instructor.firstname  %> 
-<p> <%=cl.classdate.toDateString()  %> </p>
-<% }) %> 
 
-<div class="row">
-    <div class="col s12 m3">
-        <div class="card pink lighten-5">
-        <!-- <div class="card-image waves-effect waves-block waves-light">
-        <img class="activator" src="images/office.jpg">
-        </div> -->
-            <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-            <p>Info about the clases</p>
-            <p><a href="#">This is a link</a></p>
-            </div>
-            <div class="card-action">
-                <a href="#"> link</a>
-                <a href="#"> link</a>
-            </div>
-            <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-            <p>Here is some more information about this product that is only revealed once clicked on.</p>
-            </div>
-         </div>
-    </div>
-</div>
+<table class="responsive-table striped ">
+    <thead>
+      <tr>
+        <th>Id</th>  
+        <th>Date</th>  
+        <th>Class Name and Type</th>
+        <th>Timings</th>
+        <th>Instructor</th>
+        <th>Location</th>
+        <th>Cancel Classes</th>
+        <th>Edit Classes</th>
+      </tr>
+    </thead>
+    <tbody>
+        <%   classes.forEach(cl=>{ %>
+            <% let res = cl.starttime.split(":")[0] %>    
+            <% let str = "am"; if(res >=12) { str = "pm" }%> 
+            <% let res1 = cl.endtime.split(":")[0] %>    
+            <% let str1 = "am"; if(res1 >=12) { str1 = "pm" }%>  
+            <tr>
+                <td><%=cl.id%> </td>
+                <td><%=cl.classdate.toDateString()%></td>
+                <td><%=cl.classname%>,  <%=cl.classtype%></td>
+                <td><%=cl.starttime+" "+str+"-"%><%=cl.endtime+" "+str1%></td>
+                <td> <%=cl.instructor.firstname %>  <%=cl.instructor.lastname%></td>
+                <td><%=cl.location.centername%></td>
+                <td>  
+                    <form  method="POST" action="/class/<%=cl.id%>?_method=DELETE">
+                        <button class="btn waves-effect waves-light pink lighten-3" type="submit">Remove
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </form>
+                </td>
+                <td>
+                    <form  method="GET" action="/class/<%=cl.id%>">
+                        <button class="btn waves-effect waves-light pink lighten-3" type="submit">Update
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </form>
+                </td>
+             </tr>
+        <% }) %> 
+    </tbody>
+</table>    
 
-
- <!--  <div class="row">
-    <div class="col s12 m6">
-      <div class="card blue-grey darken-1">
-        <div class="card-content white-text">
-          <span class="card-title">Card Title</span>
-          <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
-        </div>
-        <div class="card-action">
-          <a href="#">This is a link</a>
-          <a href="#">This is a link</a>
-        </div>
-      </div>
-    </div>
-  </div> -->

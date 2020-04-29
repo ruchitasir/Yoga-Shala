@@ -3,6 +3,11 @@ let router = require('express').Router();
 let db = require('../models')
 let passport = require('../config/passportConfig')
 let Sequelize = require('sequelize')
+let userLogin = require('../middleware/userLogin')
+
+//Custom middleware that is Only applied to this route in this file
+//this one applies to the entire router
+router.use(userLogin)
 
 
 function timeslot(){
@@ -68,6 +73,23 @@ router.post('/show',(req,res)=>{
   
 })
 
+router.put('/show',(req,res)=>{
+  console.log(req.body)
+  db.classevent.update(req.body,{
+    where: { id: req.body.id},
+    returning : true
+  })
+  .then(([row,cl])=>{
+    console.log("put route class",cl)
+    res.redirect('/class/show')
+  })
+  .catch(err=>{
+    console.log(err)
+    res.render('error')
+  })
+
+})
+
 router.get('/show',(req,res)=>{
 
   db.classevent.findAll({
@@ -89,7 +111,7 @@ router.get('/schedule',(req,res)=>{
   const Op = Sequelize.Op
  let today = new Date();
  let in_four_weeks = new Date((today.getTime() + (30*24*60*60*1000)))
- console.log('today ',today.toDateString(),' in_four_weeks ',in_four_weeks)
+ //console.log('today ',today.toDateString(),' in_four_weeks ',in_four_weeks)
   db.classevent.findAll({
     where: {classdate: { [Op.between] : [ today, in_four_weeks ] } },
     order: [['classdate','ASC'],['starttime','ASC']],
@@ -117,14 +139,15 @@ router.get('/registerclass',(req,res)=>{
   db.classevent.findAll({
     where: {classdate: { [Op.between] : [ today, in_four_weeks ] } },
     order: [['classdate','ASC'],['starttime','ASC']],
-    include: [ db.instructor, db.location]
+    include: [ db.instructor, db.location, db.user]
   })
   .then(classes=>{
-    console.log('classes:',classes)
+    
     let msg = false;
     if(Object.keys(classes).length){
        msg = true;
     }
+    console.log('classes: register',classes)
     res.render('class/registerclass',{classes, msg})
   })
   .catch(err=>{
@@ -135,7 +158,7 @@ router.get('/registerclass',(req,res)=>{
 })
 
 router.post('/userclass',(req,res)=>{
-  console.log(req.body)
+ // console.log(req.body)
   db.classevent.findOne({
     where: {id: req.body.id}
   })
@@ -156,8 +179,80 @@ router.post('/userclass',(req,res)=>{
 })
 
 router.get('/userclass',(req,res)=>{
+  userId = res.locals.user.dataValues.id;
+  db.user.findOne({
+    where : {id: userId},
+    include: [db.classevent]
+  })
+  .then(user=>{
+    console.log("user class ", user)
+    res.render('class/userclass',{user})
+  })
+  .catch(err=>{
+    console.log(err)
+    res.render('error')
+  })
+ 
+})
 
-  res.render('class/userclass')
+router.get('/:id',(req,res)=>{
+  let timeSlot = timeslot()
+  db.classevent.findOne({
+    where: {id: req.params.id},
+    include: [db.instructor, db.location]
+  })
+  .then(cl=>{
+    db.instructor.findAll()
+    .then(instructors=>{
+        db.location.findAll()
+        .then(locations=>{
+          res.render('class/edit',{ cl, instructors, locations, timeSlot })
+        })
+        .catch(err=>{
+          console.log(err)
+          res.render('error')
+        })
+    })
+    .catch(err=>{
+      console.log(err)
+      res.render('error')
+    })   
+    
+  })
+  .catch(err=>{
+    console.log(err)
+    res.render('error')
+  })
+    
+  
+})
+
+
+router.delete('/:id', (req,res) => {
+ 
+  // delete the relation first
+  db.class_user.destroy({
+    where: { classeventId: req.params.id }
+  })
+  .then(() => {
+    // Now I am free to delete the class itself
+    db.classevent.destroy({
+      where: { id: req.params.id }
+    })
+    .then(cancelledClass => {
+      res.redirect('/class/show')
+    })
+    .catch(err => {
+      console.log('Oh no what happened', err)
+      res.render('main/404')
+    })
+  })
+  .catch(err => {
+    console.log('Oh no what happened', err)
+    res.render('main/404')
+  }) 
+
+  
 })
 
 //Export (allow me to include this in another page)

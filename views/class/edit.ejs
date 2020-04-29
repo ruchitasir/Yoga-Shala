@@ -1,0 +1,114 @@
+<h1>Edit this class</h1>
+<h5>All fields are required. Form will not submit until all fields are filled in!</h5>
+
+<hr>
+<div class="left-align editH5">
+    <h5 >Previously stored as:</h5>
+</div>
+
+<div class="row" id="editTable">
+    <table  class="responsive-table striped">
+        <thead>
+          <tr>
+                <th>Class Name</th> 
+                <th>Class Type</th>
+                <th>Date</th> 
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Instructor</th>
+                <th>Location</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><%=cl.classname%></td>
+                <td><%=cl.classtype%></td>
+                <td><%=cl.classdate%></td>
+                <td><%=cl.starttime%></td>
+                <td><%=cl.endtime%></td>
+                <td><%=cl.instructor.firstname%>  <%=cl.instructor.lastname %> </td>
+                <td><%=cl.location.centername%></td>
+            </tr>
+        </tbody>
+    </table>  
+</div>
+<hr>
+<hr>
+<div class="row">
+    <form class="col s12" method="POST" action="/class/show?_method=PUT">
+        <div class="row">
+            <input type="hidden" name="id" value=<%=cl.id%>>
+            <div class="input-field col s6">
+                <input id="classname" type="text" name="classname" value="<%=cl.classname%> " required>
+                <label for="classname">Class Name</label>
+            </div>
+            <div class="input-field col s6">
+                
+                <select name="classtype" required>
+                <option  value="" disabled selected>Choose your option</option>
+                <option  value="Level-1">Level-1</option>
+                <option  value="Level-2">Level-2</option>
+                <option  value="Level-3">Level-3</option>
+                <option  value="Advanced">Advanced</option>
+                </select>
+                <label for="classtype">Types</label>
+               
+            </div>
+        </div>  
+        <div class="row">
+            <div class="input-field col s12">    
+                <input id="classdate" type="text" name="classdate" class="dateCurrent" required>
+                <label for="classdate">Date</label>
+            </div>
+        </div>  
+        <div class="row">
+            <div class="input-field col s6">
+                <select name="starttime" required>
+                    <option  value="" disabled selected>Choose your option</option>
+                    <%  timeSlot.starttimeSlots.forEach(st=>{ %> 
+                     <option  value="<%=st%>"> <%=st%> </option>
+                         <% }) %> 
+                </select>
+                <label for="starttime">Start time</label>  
+            </div>
+
+            <div class="input-field col s6">    
+                <select name="endtime" required>
+                    <option  value="" disabled selected>Choose your option</option>
+                    <%  timeSlot.endtimeSlots.forEach(et=>{ %> 
+                     <option  value="<%=et%>"> <%=et%> </option>
+                    <% }) %> 
+                </select>
+                <label for="endtime">End time</label>  
+            </div>
+        </div> 
+        <div class="row">
+            <div class="input-field col s6">
+                <select name="instructorId" required>
+                <option  value="" disabled selected>Choose your option</option>
+                   <%  instructors.forEach(i=>{ %>
+                   <% let fullname = i.firstname +" "+ i.lastname %> 
+                <option  value="<%=i.id%>"> <%=fullname%> </option>
+                    <% }) %> 
+                </select>
+                <label for="instructorId">Instructor</label>
+            </div>
+            <div class="input-field col s6">
+                <select name="locationId" required>
+                <option  value="" disabled selected>Choose your option</option>
+                   <%  locations.forEach(l=>{ %>
+                <option  value="<%=l.id%>"> <%=l.centername%> </option>
+                    <% }) %> 
+                </select>
+                <label for="locationId">Location</label>
+            </div>
+
+        </div>
+        <div class="row">
+            
+            <button class="btn waves-effect waves-light pink lighten-3" type="submit"> Update
+                <i class="material-icons right">send</i>
+            </button>
+        </div>
+    </form>
+</div>

@@ -8,7 +8,7 @@ let express = require('express')
 let flash= require('connect-flash')
 let layouts = require('express-ejs-layouts')
 let session = require('express-session')
-
+let methodOverride = require('method-override');
 // creata an app instance
 let app = express()
 
@@ -25,6 +25,7 @@ app.use(layouts)
 // Set up static folder with 
 app.use(express.static('static'))
 
+app.use(methodOverride('_method'))
 // Decrypt variables coming in via POST routes from forms
 app.use(express.urlencoded({extended:false}))
 
