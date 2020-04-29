@@ -22,9 +22,38 @@
         <p class="w3-large w3-text-grey w3-hide-medium">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
       </div>
     </div>
-    
-    <hr>
-    
+  <hr>
+     
+
+<div class="w3-content" style="max-width:400px">
+  <% poses.forEach(p=>{ %>
+    <div class="mySlides w3-container w3-white w3-card-4">
+      <p><span class="w3-tag w3-pink"><%=p.sanskrit_name%></span>
+      <h1><b><%=p.english_name%>  </b></h1>
+      <h1><i></i></h1>
+      <img  src="<%=p.img_url%>"  style="width:100%">
+    </div>
+  <% }) %> 
+</div>
+
+<script>
+var slideIndex = 0;
+carousel();
+
+function carousel() {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none"; 
+  }
+  slideIndex++;
+  if (slideIndex > x.length) {slideIndex = 1} 
+  x[slideIndex-1].style.display = "block"; 
+  setTimeout(carousel, 2000); 
+}
+</script>
+      
+   <hr>
     <!-- Menu Section -->
     <div class="w3-row w3-padding-64" id="menu">
       <div class="w3-col l6 w3-padding-large">

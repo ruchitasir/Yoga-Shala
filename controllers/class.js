@@ -4,6 +4,35 @@ let db = require('../models')
 let passport = require('../config/passportConfig')
 let Sequelize = require('sequelize')
 let userLogin = require('../middleware/userLogin')
+//let poses = require('../yoga_api.json')
+let fs = require('fs');
+
+
+
+router.get('/schedule',(req,res)=>{
+  const Op = Sequelize.Op
+ let today = new Date();
+ let in_four_weeks = new Date((today.getTime() + (30*24*60*60*1000)))
+ //console.log('today ',today.toDateString(),' in_four_weeks ',in_four_weeks)
+  db.classevent.findAll({
+    where: {classdate: { [Op.between] : [ today, in_four_weeks ] } },
+    order: [['classdate','ASC'],['starttime','ASC']],
+    include: [ db.instructor, db.location]
+  })
+  .then(classes=>{
+    console.log('classes:',classes)
+    let msg = false;
+    if(Object.keys(classes).length){
+       msg = true;
+    }
+    res.render('class/showclass',{classes, msg})
+  })
+  .catch(err=>{
+    console.log(err)
+    res.render('error')
+  })
+
+})
 
 //Custom middleware that is Only applied to this route in this file
 //this one applies to the entire router
@@ -30,6 +59,7 @@ function timeslot(){
   endtimeSlots.push('22:00')
   return {starttimeSlots: starttimeSlots, endtimeSlots: endtimeSlots}
 }
+
 
 
 router.get('/new',(req,res)=>{
@@ -107,30 +137,7 @@ router.get('/show',(req,res)=>{
 })
 
 
-router.get('/schedule',(req,res)=>{
-  const Op = Sequelize.Op
- let today = new Date();
- let in_four_weeks = new Date((today.getTime() + (30*24*60*60*1000)))
- //console.log('today ',today.toDateString(),' in_four_weeks ',in_four_weeks)
-  db.classevent.findAll({
-    where: {classdate: { [Op.between] : [ today, in_four_weeks ] } },
-    order: [['classdate','ASC'],['starttime','ASC']],
-    include: [ db.instructor, db.location]
-  })
-  .then(classes=>{
-    console.log('classes:',classes)
-    let msg = false;
-    if(Object.keys(classes).length){
-       msg = true;
-    }
-    res.render('class/showclass',{classes, msg})
-  })
-  .catch(err=>{
-    console.log(err)
-    res.render('error')
-  })
 
-})
 
 router.get('/registerclass',(req,res)=>{
   const Op = Sequelize.Op

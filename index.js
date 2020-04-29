@@ -9,6 +9,7 @@ let flash= require('connect-flash')
 let layouts = require('express-ejs-layouts')
 let session = require('express-session')
 let methodOverride = require('method-override');
+let fs = require('fs');
 // creata an app instance
 let app = express()
 
@@ -63,7 +64,11 @@ app.use('/class',require('./controllers/class'))
 
 // create a home page
 app.get('/',(req,res)=>{
-    res.render('home')
+
+    let poseAPI = fs.readFileSync('./yoga_api.json');
+   let poses = JSON.parse(poseAPI);
+   console.log("poses", poses)
+    res.render('home',{ poses })
 })
 
  // create a wildcard route
