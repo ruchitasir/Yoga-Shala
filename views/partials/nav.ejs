@@ -1,64 +1,53 @@
+  <!-- Dropdown Structure -->
+  <ul id="dropdown1" class="dropdown-content pink lighten-5">
+    <%if (user) {  %>
+        <% if (user.admin) { %>
+            <li> <a class="grey-text text-darken-3" href="/profile/admin">Admin Page</a> </li>
+            <li> <a class="grey-text text-darken-3" href="/class/new">Add New Class</a> </li>
+            <li> <a class="grey-text text-darken-3" href="/class/show">Show All Classes</a> </li>
+        <% } else { %> 
+            <li> <a class="grey-text text-darken-3" href="/profile/user">Profile Page</a> </li>
+            <li> <a class="grey-text text-darken-3" href="/class/registerclass">Register </a> </li>
+            <li> <a class="grey-text text-darken-3" href="/class/userclass">My Classes </a>  </li>
+        <% } %>      
+ <% } %>
+  </ul>
+
+
 <nav>
-   
-    <div class="nav-wrapper pink lighten-5">
-      <a class="grey-text text-darken-1" href="/" class="brand-logo center"> 
-        <img src="/image/lotus.png" width="60px">
-        <strong> Yoga Shala </strong>
-    </a>
-      <a href="#" data-target="mobile-demo" class="sidenav-trigger">
-          <i class="material-icons">menu</i>
-     </a>
+     <div class="nav-wrapper pink lighten-5">
+      <a class="grey-text text-darken-1" href="/" class="brand-logo center"> <img src="/image/lotus.png" width="60px"> <strong> Yoga Shala </strong>
+      </a>
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"> <i class="material-icons">menu</i> </a>
     
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li>
-            <a class="grey-text text-darken-3" href="/">Home</a>
-        </li>
-        <li>
-            <a class="grey-text text-darken-3" href="/class/schedule">Class Schedule</a>
-        </li>
-         <%if (user) {  %>
-                <li>
-                    <strong> Hi, <%=user.firstname%></strong> 
-                </li>
-               
-                <% if (user.admin) { %>
-                    <li>
-                        <a class="grey-text text-darken-3" href="/profile/admin">Admin Page</a>
-                    </li>
-                    <li>
-                        <a class="grey-text text-darken-3" href="/class/new">Add New Class</a>
-                    </li>
-                    <li>
-                        <a class="grey-text text-darken-3" href="/class/show">Show All Classes</a>
-                    </li>
-                <% } else { %> 
-                    <li>
-                        <a class="grey-text text-darken-3" href="/profile/user">Profile Page</a>
-                    </li>
-                    <li>
-                        <a class="grey-text text-darken-3" href="/class/registerclass">Register </a>
-                    </li>
-                    <li>
-                        <a class="grey-text text-darken-3" href="/class/userclass">My Classes </a>
-                    </li>
-                <% } %>   
-                <li>
-                    <a class="grey-text text-darken-3" href="/auth/logout">Logout</a>
-                    
-                </li>
-         <% } else { %>     
-                <li>
-                    <a class="grey-text text-darken-3" href="/auth/login">Login</a>
-                </li>
-                <li>
-                    <a class="grey-text text-darken-3" href="/auth/signup">Sign Up</a>
-                </li>
+        <li> <a class="grey-text text-darken-3" href="/">Home</a> </li>
+        <li> <a class="grey-text text-darken-3" href="/class/schedule">Class Schedule</a> </li>
+        <%if (user) { %>  
+            <li> <a class="grey-text text-darken-3" href="/auth/logout">Logout</a> </li>
+            <% } else{ %>
+            <li>  <a class="grey-text text-darken-3" href="/auth/login">Login</a>  </li>
+            <li>  <a class="grey-text text-darken-3" href="/auth/signup">Sign Up</a>  </li>
+         <% } %>    
+      </ul>
+
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <%if (user) { %>
+        <li> <strong class="grey-text text-darken-3"> Hi, <%=user.firstname%></strong> </li>  
+        <li><a class="dropdown-trigger grey-text text-darken-3" href="#!" data-target="dropdown1">Links<i class="material-icons right">arrow_drop_down</i></a></li>
         <% } %> 
       </ul>
+
     </div>
   </nav>
 
+
+
+
   <ul class="sidenav" id="mobile-demo">
+      <li>
+        <a class="grey-text text-darken-1" href="/" class="brand-logo center"> <img src="/image/lotus.png" width="60px">  </a>
+      </li>
     <li>
         <a class="grey-text text-darken-3" href="/">Home</a>
     </li>

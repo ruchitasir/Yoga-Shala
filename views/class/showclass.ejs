@@ -13,7 +13,8 @@
                 <div class="card-content">  
                 <span class="card-title activator grey-text text-darken-4"><%=cl.classdate.toDateString()%> at <%=cl.starttime+" "+str%> <i class="material-icons right">more_vert</i></span>
                 <p>Class ends at: <%=cl.endtime+" "+str1%>  </p>
-                <p><a href="#">This is a link</a></p>
+                <p>Location: <%=cl.location.centername %>  </p>
+                <p>Click on the Date for more info</p>
                 </div>
                 <div class="card-action">   
                     <%if (user) {  %>
@@ -26,8 +27,8 @@
                 <span class="card-title grey-text text-darken-4"> Class details <i class="material-icons right">close</i></span>
                 <p>Class Name: <%=cl.classname %></p>
                 <p>Instructor: <%=cl.instructor.firstname  %>  <%=cl.instructor.lastname%> </p>
-                <p>Class Type: <%=cl.classtype  %> </p>
-                <p>Location: <%=cl.location.centername %>  </p>
+                <p>Class Type: <%=cl.classtype  %> </p> 
+                <p>Price: <%=cl.price%> $ </p>
                 </div>
             </div>
         </div>

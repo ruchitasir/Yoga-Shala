@@ -1,5 +1,15 @@
 <h1><%=user.firstname%>, your registered classes </h1>
 
+ <!-- Dropdown Trigger -->
+ <a class='dropdown-trigger btn pink lighten-3 grey-text text-darken-3' href='#' data-target='dropdown2'>Sort Classes!</a>
+
+ <!-- Dropdown Structure -->
+ <ul id='dropdown2' class='dropdown-content'>
+   <li><a class="grey-text text-darken-3" href="/class/userUpcoming">Upcoming Classes</a></li>
+   <li><a class="grey-text text-darken-3" href="/class/userHistory">History</a></li>
+   <li class="divider" tabindex="-1"></li>
+   <li><a class="grey-text text-darken-3" href="/class/userclass">All Classes</a></li>
+ </ul>
 
 
 <table class="responsive-table striped ">
@@ -8,20 +18,60 @@
           <th>Class Name and Type</th>
           <th>Date</th>
           <th>Timings</th>
+          <th>Price</th>
       </tr>
     </thead>
     <tbody>
+    <% let today = new Date(); today.setHours(0, 0, 0, 0);  %> 
+     <% if (!msg) { %> 
          <% user.classevents.forEach(cl=>{ %>
             <% let res = cl.starttime.split(":")[0] %>    
             <% let str = "am"; if(res >=12) { str = "pm" }%> 
             <% let res1 = cl.endtime.split(":")[0] %>    
             <% let str1 = "am"; if(res1 >=12) { str1 = "pm" }%>  
-        <tr>
+             <tr>
             <td><%=cl.classname%>,  <%=cl.classtype%></td>
             <td><%=cl.classdate.toDateString()%></td>
             <td><%=cl.starttime+" "+str+"-"%><%=cl.endtime+" "+str1%></td>
-            
-        </tr>
+            <td><%=cl.price%> $</td>
+            </tr>
         <% }) %>
+    <% } else if (msg =="upcoming") { %>
+        <% user.classevents.forEach(cl=>{ %>
+            <% let res = cl.starttime.split(":")[0] %>    
+            <% let str = "am"; if(res >=12) { str = "pm" }%> 
+            <% let res1 = cl.endtime.split(":")[0] %>    
+            <% let str1 = "am"; if(res1 >=12) { str1 = "pm" }%>  
+            <% let cldate = cl.classdate; cldate.setHours(0, 0, 0, 0); %> 
+            <% if(cl.classdate >= today) { %> 
+                <tr>
+                <td><%=cl.classname%>,  <%=cl.classtype%></td>
+                <td><%=cl.classdate.toDateString()%></td>
+                <td><%=cl.starttime+" "+str+"-"%><%=cl.endtime+" "+str1%></td>
+                <td><%=cl.price%> $</td>
+                </tr>
+            <% } %> 
+         <% }) %>   
+    <% }  else if (msg =="history") { %>
+        <% user.classevents.forEach(cl=>{ %>
+            <% let res = cl.starttime.split(":")[0] %>    
+            <% let str = "am"; if(res >=12) { str = "pm" }%> 
+            <% let res1 = cl.endtime.split(":")[0] %>    
+            <% let str1 = "am"; if(res1 >=12) { str1 = "pm" }%>  
+            <% let cldate = cl.classdate; cldate.setHours(0, 0, 0, 0); %> 
+            <% if(cl.classdate < today) { %> 
+                <tr>
+                <td><%=cl.classname%>,  <%=cl.classtype%></td>
+                <td><%=cl.classdate.toDateString()%></td>
+                <td><%=cl.starttime+" "+str+"-"%><%=cl.endtime+" "+str1%></td>
+                <td><%=cl.price%> $</td>
+                </tr>
+            <% } %> 
+         <% }) %>   
+    <% } %>       
+
     </tbody>
 </table>
+
+
+ 

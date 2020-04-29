@@ -104,7 +104,7 @@ router.post('/show',(req,res)=>{
 })
 
 router.put('/show',(req,res)=>{
-  console.log(req.body)
+  //console.log(req.body)
   db.classevent.update(req.body,{
     where: { id: req.body.id},
     returning : true
@@ -186,14 +186,25 @@ router.post('/userclass',(req,res)=>{
 })
 
 router.get('/userclass',(req,res)=>{
-  userId = res.locals.user.dataValues.id;
+  let msg= "";
+  let userId = res.locals.user.dataValues.id;
   db.user.findOne({
     where : {id: userId},
     include: [db.classevent]
   })
   .then(user=>{
-    console.log("user class ", user)
-    res.render('class/userclass',{user})
+   // console.log("user class ", user.dataValues.classevents[0])
+    clObjs = [];
+      user.dataValues.classevents.forEach(cl=>{
+         db.classevent.findOne({ 
+          where: {id: cl.dataValues.id},
+          include: [db.instructor,db.location]
+        }).then(clObj=>{
+          clObjs.push(clObj)
+        })      
+      })
+      console.log("CLASS OBJS", clObjs)
+    res.render('class/userclass',{user,msg})
   })
   .catch(err=>{
     console.log(err)
@@ -201,6 +212,43 @@ router.get('/userclass',(req,res)=>{
   })
  
 })
+
+router.get('/userUpcoming',(req,res)=>{
+  let msg = "upcoming";
+
+  let userId = res.locals.user.dataValues.id;
+  db.user.findOne({
+    where : {id: userId},
+    include: [db.classevent]
+  })
+  .then(user=>{
+    res.render('class/userclass',{user,msg})
+  })
+  .catch(err=>{
+    console.log(err)
+    res.render('error')
+  })
+  
+})
+
+router.get('/userHistory',(req,res)=>{
+  let msg = "history";
+
+  let userId = res.locals.user.dataValues.id;
+  db.user.findOne({
+    where : {id: userId},
+    include: [db.classevent]
+  })
+  .then(user=>{
+    res.render('class/userclass',{user,msg})
+  })
+  .catch(err=>{
+    console.log(err)
+    res.render('error')
+  })
+  
+})
+
 
 router.get('/:id',(req,res)=>{
   let timeSlot = timeslot()

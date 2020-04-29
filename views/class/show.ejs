@@ -10,6 +10,7 @@
         <th>Timings</th>
         <th>Instructor</th>
         <th>Location</th>
+        <th>Price</th>
         <th>Cancel Classes</th>
         <th>Edit Classes</th>
       </tr>
@@ -27,6 +28,7 @@
                 <td><%=cl.starttime+" "+str+"-"%><%=cl.endtime+" "+str1%></td>
                 <td> <%=cl.instructor.firstname %>  <%=cl.instructor.lastname%></td>
                 <td><%=cl.location.centername%></td>
+                <td><%=cl.price%> $</td>
                 <td>  
                     <form  method="POST" action="/class/<%=cl.id%>?_method=DELETE">
                         <button class="btn waves-effect waves-light pink lighten-3" type="submit">Remove

@@ -7,7 +7,8 @@ module.exports = (sequelize, DataTypes) => {
     starttime: DataTypes.STRING,
     endtime: DataTypes.STRING,
     instructorId: DataTypes.INTEGER,
-    locationId: DataTypes.INTEGER
+    locationId: DataTypes.INTEGER,
+    price : DataTypes.FLOAT
   }, {});
   classevent.associate = function(models) {
     // associations can be defined here

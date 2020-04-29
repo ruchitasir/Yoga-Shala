@@ -9,7 +9,7 @@
           <th>Timings</th>
           <th>Instructor</th>
           <th>Location</th>
-          <!-- <th>Price</th> -->
+           <th>Price</th>
           <th>Register</th>
       </tr>
     </thead>
@@ -25,6 +25,7 @@
             <td><%=cl.starttime+" "+str+"-"%><%=cl.endtime+" "+str1%></td>
             <td> <%=cl.instructor.firstname %>  <%=cl.instructor.lastname%></td>
             <td><%=cl.location.centername%></td>
+            <td><%=cl.price%> $</td>
             <td>
                 <form  method="POST" action="/class/userclass">
                     <input id="classid" type="hidden" name="id" value="<%=cl.id%>">
