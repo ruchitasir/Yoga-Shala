@@ -146,7 +146,7 @@ router.get('/registerclass',(req,res)=>{
   db.classevent.findAll({
     where: {classdate: { [Op.between] : [ today, in_four_weeks ] } },
     order: [['classdate','ASC'],['starttime','ASC']],
-    include: [ db.instructor, db.location, db.user]
+    include: [ db.instructor, db.location, db.user, db.class_user ]
   })
   .then(classes=>{
     
@@ -164,6 +164,7 @@ router.get('/registerclass',(req,res)=>{
 
 })
 
+//Add users to a particular class
 router.post('/userclass',(req,res)=>{
  // console.log(req.body)
   db.classevent.findOne({
@@ -190,20 +191,21 @@ router.get('/userclass',(req,res)=>{
   let userId = res.locals.user.dataValues.id;
   db.user.findOne({
     where : {id: userId},
-    include: [db.classevent]
+    include: [db.classevent, db.class_user]
   })
   .then(user=>{
    // console.log("user class ", user.dataValues.classevents[0])
-    clObjs = [];
+   /*  let clObjs = [];
       user.dataValues.classevents.forEach(cl=>{
          db.classevent.findOne({ 
           where: {id: cl.dataValues.id},
           include: [db.instructor,db.location]
         }).then(clObj=>{
-          clObjs.push(clObj)
+          console.log("CL ob",clObj.dataValues)
+          clObjs.push(clObj.dataValues)
         })      
       })
-      console.log("CLASS OBJS", clObjs)
+      console.log("CLASS OBJS", clObjs) */
     res.render('class/userclass',{user,msg})
   })
   .catch(err=>{
@@ -219,7 +221,7 @@ router.get('/userUpcoming',(req,res)=>{
   let userId = res.locals.user.dataValues.id;
   db.user.findOne({
     where : {id: userId},
-    include: [db.classevent]
+    include: [db.classevent, db.class_user]
   })
   .then(user=>{
     res.render('class/userclass',{user,msg})
@@ -237,7 +239,7 @@ router.get('/userHistory',(req,res)=>{
   let userId = res.locals.user.dataValues.id;
   db.user.findOne({
     where : {id: userId},
-    include: [db.classevent]
+    include: [db.classevent, db.class_user]
   })
   .then(user=>{
     res.render('class/userclass',{user,msg})
@@ -249,6 +251,25 @@ router.get('/userHistory',(req,res)=>{
   
 })
 
+//User cannot attend the class so need to update the daatabase to change the flag to cancel
+ router.put('/cancel',(req,res)=>{
+
+  db.class_user.update(req.body,{
+    where: { userId: req.body.userId,
+            classeventId : req.body.classeventId
+    },
+    returning : true 
+  })
+  .then(([row,clu])=>{
+
+     res.redirect('/class/userclass')
+  })
+  .catch(err=>{
+    console.log(err)
+    res.render('error')
+  })
+    
+ })
 
 router.get('/:id',(req,res)=>{
   let timeSlot = timeslot()

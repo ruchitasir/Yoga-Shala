@@ -14,6 +14,9 @@ module.exports = {
       userId: {
         type: Sequelize.INTEGER
       },
+      registerCancel: {
+        type: Sequelize.TEXT
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

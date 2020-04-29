@@ -26,15 +26,16 @@
             <td> <%=cl.instructor.firstname %>  <%=cl.instructor.lastname%></td>
             <td><%=cl.location.centername%></td>
             <td><%=cl.price%> $</td>
+              
             <td>
                 <form  method="POST" action="/class/userclass">
                     <input id="classid" type="hidden" name="id" value="<%=cl.id%>">
                     <input id="userid" type="hidden" name="userId" value="<%=user.id%>">
                    
                     <% let status = true %> 
-                    <% cl.users.forEach(u=>{ %>
-                        <% if(u.id === user.id) { status = false; %>
-                            <button class="btn waves-effect waves-light pink lighten-3" type="submit" disabled> Registered
+                    <% cl.class_users.forEach(u=>{ %>
+                        <% if(u.userId === user.id && u.registerCancel== "register") { status = false; %>
+                            <button class="btn waves-effect waves-light pink lighten-3" type="submit" disabled> Registered <%= u.registerCancel %> 
                                 <i class="material-icons right">send</i>
                             </button>
                         <% } %> 
@@ -50,3 +51,5 @@
       <% }) %> 
     </tbody>
   </table>
+
+

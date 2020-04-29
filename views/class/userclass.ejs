@@ -9,7 +9,9 @@
    <li><a class="grey-text text-darken-3" href="/class/userHistory">History</a></li>
    <li class="divider" tabindex="-1"></li>
    <li><a class="grey-text text-darken-3" href="/class/userclass">All Classes</a></li>
+   <li><a class="grey-text text-darken-3" href="/class/userUpcoming">Cancel Classes</a></li>
  </ul>
+
 
 
 <table class="responsive-table striped ">
@@ -19,6 +21,10 @@
           <th>Date</th>
           <th>Timings</th>
           <th>Price</th>
+          <th>Cancelled (By You) </th>
+          <% if (msg =="upcoming"){ %>
+              <th>Cancel Classes</th>
+          <% } %> 
       </tr>
     </thead>
     <tbody>
@@ -28,27 +34,50 @@
             <% let res = cl.starttime.split(":")[0] %>    
             <% let str = "am"; if(res >=12) { str = "pm" }%> 
             <% let res1 = cl.endtime.split(":")[0] %>    
-            <% let str1 = "am"; if(res1 >=12) { str1 = "pm" }%>  
-             <tr>
-            <td><%=cl.classname%>,  <%=cl.classtype%></td>
-            <td><%=cl.classdate.toDateString()%></td>
-            <td><%=cl.starttime+" "+str+"-"%><%=cl.endtime+" "+str1%></td>
-            <td><%=cl.price%> $</td>
-            </tr>
+            <% let str1 = "am"; if(res1 >=12) { str1 = "pm" }%> 
+                <%user.class_users.forEach(clu=>{ %>
+                    <% if(clu.classeventId == cl.id) {%>     
+                    <tr>
+                    <td><%=cl.classname%>,  <%=cl.classtype%></td>
+                    <td><%=cl.classdate.toDateString()%></td>
+                    <td><%=cl.starttime+" "+str+"-"%><%=cl.endtime+" "+str1%></td>
+                    <td><%=cl.price%> $</td>
+                    <td> <% if(clu.registerCancel=="cancel"){ %>  <i class="small material-icons">cancel</i> <% } %></td>
+                    </tr>
+                    <% } %> 
+                <% }) %> 
         <% }) %>
     <% } else if (msg =="upcoming") { %>
         <% user.classevents.forEach(cl=>{ %>
-            <% let res = cl.starttime.split(":")[0] %>    
-            <% let str = "am"; if(res >=12) { str = "pm" }%> 
-            <% let res1 = cl.endtime.split(":")[0] %>    
-            <% let str1 = "am"; if(res1 >=12) { str1 = "pm" }%>  
-            <% let cldate = cl.classdate; cldate.setHours(0, 0, 0, 0); %> 
+                <% let res = cl.starttime.split(":")[0] %>    
+                <% let str = "am"; if(res >=12) { str = "pm" }%> 
+                <% let res1 = cl.endtime.split(":")[0] %>    
+                <% let str1 = "am"; if(res1 >=12) { str1 = "pm" }%>  
+                <% let cldate = cl.classdate; cldate.setHours(0, 0, 0, 0); %> 
             <% if(cl.classdate >= today) { %> 
                 <tr>
-                <td><%=cl.classname%>,  <%=cl.classtype%></td>
-                <td><%=cl.classdate.toDateString()%></td>
-                <td><%=cl.starttime+" "+str+"-"%><%=cl.endtime+" "+str1%></td>
-                <td><%=cl.price%> $</td>
+                    <% user.class_users.forEach(clu=>{ %>
+                        <% if(clu.classeventId == cl.id) { %>     
+                            <td><%=cl.classname%>,  <%=cl.classtype%></td>
+                            <td><%=cl.classdate.toDateString()%></td>
+                            <td><%=cl.starttime+" "+str+"-"%><%=cl.endtime+" "+str1%></td>
+                            <td><%=cl.price%> $</td>
+                            <td> <% if(clu.registerCancel=="cancel"){ %>  <i class="small material-icons">cancel</i> <% } %></td>
+                            <td>  
+                                <% if(clu.registerCancel=="register") { %> 
+                                    <form  method="POST" action="/class/cancel?_method=PUT">
+                                        <input type="hidden" name="registerCancel" value="cancel">
+                                        <input type="hidden" name="userId" value="<%=user.id%>">
+                                        <input type="hidden" name="classeventId" value="<%=cl.id%>">
+                                        <button class="btn waves-effect waves-light pink lighten-3" type="submit">Cancel
+                                            <i class="material-icons right">send</i>
+                                        </button>
+                                    </form>
+                                <% } %>
+                            </td>
+                            
+                        <% } %> 
+                    <% }) %>          
                 </tr>
             <% } %> 
          <% }) %>   

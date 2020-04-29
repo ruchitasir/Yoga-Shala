@@ -12,12 +12,14 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   classevent.associate = function(models) {
     // associations can be defined here
+    models.classevent.hasMany(models.class_user)
     models.classevent.belongsTo(models.location)
     models.classevent.belongsTo(models.instructor)
     models.classevent.belongsToMany(models.user,{
       through: models.class_user,
       onDelete: 'CASCADE'
     })
+    
   };
   return classevent;
 };
