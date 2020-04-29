@@ -42,46 +42,12 @@
                 <input id="classname" type="text" name="classname" value="<%=cl.classname%> " required>
                 <label for="classname">Class Name</label>
             </div>
-            <div class="input-field col s6">
-                
-                <select name="classtype" required>
-                <option  value="" disabled selected>Choose your option</option>
-                <option  value="Level-1">Level-1</option>
-                <option  value="Level-2">Level-2</option>
-                <option  value="Level-3">Level-3</option>
-                <option  value="Advanced">Advanced</option>
-                </select>
-                <label for="classtype">Types</label>
-               
-            </div>
+            <input type="hidden" name="classtype" value="<%=cl.classtype%>">
+            <input type="hidden" name="classdate" value="<%=cl.classdate%>">
+            <input type="hidden" name="starttime" value="<%=cl.starttime%>">
+            <input type="hidden" name="endtime" value="<%=cl.endtime%>">
         </div>  
-        <div class="row">
-            <div class="input-field col s12">    
-                <input id="classdate" type="text" name="classdate" class="dateCurrent" required>
-                <label for="classdate">Date</label>
-            </div>
-        </div>  
-        <div class="row">
-            <div class="input-field col s6">
-                <select name="starttime" required>
-                    <option  value="" disabled selected>Choose your option</option>
-                    <%  timeSlot.starttimeSlots.forEach(st=>{ %> 
-                     <option  value="<%=st%>"> <%=st%> </option>
-                         <% }) %> 
-                </select>
-                <label for="starttime">Start time</label>  
-            </div>
-
-            <div class="input-field col s6">    
-                <select name="endtime" required>
-                    <option  value="" disabled selected>Choose your option</option>
-                    <%  timeSlot.endtimeSlots.forEach(et=>{ %> 
-                     <option  value="<%=et%>"> <%=et%> </option>
-                    <% }) %> 
-                </select>
-                <label for="endtime">End time</label>  
-            </div>
-        </div> 
+        
         <div class="row">
             <div class="input-field col s6">
                 <select name="instructorId" required>
