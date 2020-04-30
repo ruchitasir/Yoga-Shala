@@ -4,28 +4,17 @@
 </div>
 
 <div class="row">
-    <div class="col s12 m3">
-        <div class="w3-content" style="max-width:400px">
-            <% poses.forEach(p=>{ %>
-              <div class="mySlides w3-container w3-white w3-card-4">
-                <h1><b><%=p.english_name%>  </b></h1>
-                <h3><i class="w3-tag w3-pale-red"><%=p.sanskrit_name%></i></h3>
-                <img  src="<%=p.img_url%>"  alt="<%=p.english_name%>" style="width:100%">
-            </div>
-            <% }) %>    
-          </div>
-    </div>
-    <div class="col s12 m3">
+    <div class="col s12 m4">
         <img class="responsive-img" src="<%=user.pic%>" alt="profile pic">
     </div>
-    <div class="col s12 m3">
+    <div class="col s12 m4">
         <p><strong>Name: </strong> <%=user.firstname%> <%=user.lastname%>  </p>
         <p><strong>Birthday: </strong> <%=moment(user.birthday).format('dddd MMMM Do[,] YYYY')%> </p>
         <p><strong>Account Created On: </strong> <%= moment(user.createdAt).format('dddd MMMM Do[,] YYYY')%> </p>
         <p><strong>Bio: </strong> <%=user.occupation %> </p>
     </div>
   
-    <div class="col s12 m3">
+    <div class="col s12 m4">
         <p><strong>View User's Pages</strong></p>
         <% users.forEach(u=>{ %>
             <div> 
@@ -39,25 +28,7 @@
         <% }) %> 
     </div>
 </div>
-<hr>
-<div class="row">
-   
-</div>
 
 
-<script>
-    var slideIndex = 0;
-    carousel();
-    
-    function carousel() {
-      var i;
-      var x = document.getElementsByClassName("mySlides");
-      for (i = 0; i < x.length; i++) {
-        x[i].style.display = "none"; 
-      }
-      slideIndex++;
-      if (slideIndex > x.length) {slideIndex = 1} 
-      x[slideIndex-1].style.display = "block"; 
-      setTimeout(carousel, 3000); 
-    }
-    </script>
+
+
