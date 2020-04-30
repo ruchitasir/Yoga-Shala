@@ -65,10 +65,9 @@ app.use('/class',require('./controllers/class'))
 // create a home page
 app.get('/',(req,res)=>{
 
-    let poseAPI = fs.readFileSync('./yoga_api.json');
+   let poseAPI = fs.readFileSync('./yoga_api.json');
    let poses = JSON.parse(poseAPI);
-   console.log("poses", poses)
-    res.render('home',{ poses })
+   res.render('home',{ poses })
 })
 
  // create a wildcard route
