@@ -89,12 +89,17 @@
             <% let str1 = "am"; if(res1 >=12) { str1 = "pm" }%>  
             <% let cldate = cl.classdate; cldate.setHours(0, 0, 0, 0); %> 
             <% if(cl.classdate < today) { %> 
-                <tr>
-                <td><%=cl.classname%>,  <%=cl.classtype%></td>
-                <td><%=cl.classdate.toDateString()%></td>
-                <td><%=cl.starttime+" "+str+"-"%><%=cl.endtime+" "+str1%></td>
-                <td><%=cl.price%> $</td>
-                </tr>
+                    <%user.class_users.forEach(clu=>{ %>
+                        <% if(clu.classeventId == cl.id) {%>     
+                        <tr>
+                        <td><%=cl.classname%>,  <%=cl.classtype%></td>
+                        <td><%=cl.classdate.toDateString()%></td>
+                        <td><%=cl.starttime+" "+str+"-"%><%=cl.endtime+" "+str1%></td>
+                        <td><%=cl.price%> $</td>
+                        <td> <% if(clu.registerCancel=="cancel"){ %>  <i class="small material-icons">cancel</i> <% } %></td>
+                        </tr>
+                        <% } %> 
+                    <% }) %> 
             <% } %> 
          <% }) %>   
     <% } %>       
@@ -103,4 +108,3 @@
 </table>
 
 
- 
