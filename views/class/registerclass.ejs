@@ -35,7 +35,7 @@
                     <% let status = true %> 
                     <% cl.class_users.forEach(u=>{ %>
                         <% if(u.userId === user.id && u.registerCancel== "register") { status = false; %>
-                            <button class="btn waves-effect waves-light pink lighten-3" type="submit" disabled> Registered <%= u.registerCancel %> 
+                            <button class="btn waves-effect waves-light pink lighten-3" type="submit" disabled> Registered  
                                 <i class="material-icons right">send</i>
                             </button>
                         <% } %> 
