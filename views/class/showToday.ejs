@@ -48,13 +48,18 @@
                             <li>
                             <div class="collapsible-header pink lighten-5"><i class="material-icons">people_outline</i> Students</div>
                             <div class="collapsible-body">
-                                <% let status = false %>  
+                                <% let status = false %>  <% let cancel = " "  %> 
                                 <% cl.users.forEach(u=>{ %>
                                     <%if (u.id && !(u.admin)) { %>
                                     <% status = true %>   
-                                        <ul>
-                                            <li><a class="grey-text text-darken-3" href="/profile/guest/<%=u.id%>"> <%=u.firstname%>  <%=u.lastname %> </a></li>
-                                        </ul> 
+                                    <% cl.class_users.forEach(clu=>{ %>
+                                        <% if(clu.userId == u.id && clu.registerCancel == "cancel"){ %> 
+                                         <%   cancel = " has cancelled the class" %>
+                                        <% } %> 
+                                     <% }) %>
+                                     <ul>
+                                        <li><a class="grey-text text-darken-3" href="/profile/guest/<%=u.id%>"> <%=u.firstname%>  <%=u.lastname %> <%=cancel%> </a></li>
+                                     </ul>
                                     <% } %>                                                                  
                                 <% }) %>
                                 <% if (!status) { %>
