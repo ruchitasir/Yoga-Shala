@@ -1,4 +1,4 @@
-# Node-Auth-Boiler
+# Yoga-Shala
 This is a boilerplate for an Express app with local user authentication. It exits so I have a customized boilerplate and don't have to start from scratch on all my projects.
 
 ## What It Includes
