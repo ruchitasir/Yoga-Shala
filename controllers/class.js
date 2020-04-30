@@ -123,8 +123,8 @@ router.put('/show',(req,res)=>{
 router.get('/show',(req,res)=>{
 
   db.classevent.findAll({
-    order: [['classdate','ASC']],
-    include: [ db.instructor, db.location, db.user]
+    order: [['classdate','ASC'],['classtype','ASC']],
+    include: [ db.instructor, db.location, db.user,db.class_user]
   })
   .then(classes=>{
     res.render('class/show',{classes})
@@ -136,7 +136,40 @@ router.get('/show',(req,res)=>{
 
 })
 
+//Classes to show by category for instructor
+router.get('/sort',(req,res)=>{
 
+  db.classevent.findAll({
+    order: [['classtype','ASC'],['classdate','ASC']],
+    include: [ db.instructor, db.location, db.user,db.class_user]
+  })
+  .then(classes=>{
+    res.render('class/showSortedByType',{ classes})
+  })
+  .catch(err=>{
+    console.log(err)
+    res.render('error')
+  })
+ 
+})
+
+
+//Classes to show for today for instructor
+router.get('/sortToday',(req,res)=>{
+
+  db.classevent.findAll({
+    order: [['classdate','ASC'],['classtype','ASC']],
+    include: [ db.instructor, db.location, db.user,db.class_user]
+  })
+  .then(classes=>{
+    res.render('class/showToday',{ classes})
+  })
+  .catch(err=>{
+    console.log(err)
+    res.render('error')
+  })
+ 
+})
 
 
 router.get('/registerclass',(req,res)=>{

@@ -1,5 +1,17 @@
-<h1>Show all Classes</h1>
+<h1>View all Classes</h1>
 
+ <!-- Dropdown Trigger -->
+ <a class='dropdown-trigger btn pink lighten-3 grey-text text-darken-3' href='#' data-target='dropdown3'>Filter Classes!</a>
+
+<!-- Dropdown Structure -->
+<ul id='dropdown3' class='dropdown-content'>
+    <li><a class="grey-text text-darken-3" href="/class/sortToday">Today's Classes</a></li>
+    <li><a class="grey-text text-darken-3" href="/class/sort">Class Type</a></li>
+    <li><a class="grey-text text-darken-3" href="/class/show">All Classes(By date)</a></li>  
+     <li class="divider" tabindex="-1"></li>
+     <li><a class="grey-text text-darken-3" href="/class/sort1">Upcoming Classes</a></li>
+     <li><a class="grey-text text-darken-3" href="/class/sort1">History</a></li>
+</ul>
 
 <table class="responsive-table striped ">
     <thead>
@@ -49,13 +61,18 @@
                         <li>
                           <div class="collapsible-header pink lighten-5"><i class="material-icons">people_outline</i> Students</div>
                           <div class="collapsible-body">
-                             <% let status = false %>  
+                             <% let status = false %>   <% let cancel = " "  %> 
                             <% cl.users.forEach(u=>{ %>
                                 <%if (u.id && !(u.admin)) { %>
-                                  <% status = true %>   
-                                    <ul>
-                                        <li><a class="grey-text text-darken-3" href="/profile/guest/<%=u.id%>"> <%=u.firstname%>  <%=u.lastname %> </a></li>
-                                    </ul> 
+                                  <% status = true %>  
+                                    <% cl.class_users.forEach(clu=>{ %>
+                                        <% if(clu.userId == u.id && clu.registerCancel == "cancel"){ %> 
+                                         <%   cancel = " has cancelled the class" %>
+                                        <% } %> 
+                                     <% }) %>
+                                     <ul>
+                                        <li><a class="grey-text text-darken-3" href="/profile/guest/<%=u.id%>"> <%=u.firstname%>  <%=u.lastname %> <%=cancel%> </a></li>
+                                     </ul>
                                 <% } %>                                                                  
                             <% }) %>
                             <% if (!status) { %>

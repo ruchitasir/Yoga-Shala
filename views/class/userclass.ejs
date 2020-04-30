@@ -54,7 +54,7 @@
                 <% let res1 = cl.endtime.split(":")[0] %>    
                 <% let str1 = "am"; if(res1 >=12) { str1 = "pm" }%>  
                 <% let cldate = cl.classdate; cldate.setHours(0, 0, 0, 0); %> 
-            <% if(cl.classdate >= today) { %> 
+            <% if(cldate >= today) { %> 
                 <tr>
                     <% user.class_users.forEach(clu=>{ %>
                         <% if(clu.classeventId == cl.id) { %>     
@@ -88,7 +88,7 @@
             <% let res1 = cl.endtime.split(":")[0] %>    
             <% let str1 = "am"; if(res1 >=12) { str1 = "pm" }%>  
             <% let cldate = cl.classdate; cldate.setHours(0, 0, 0, 0); %> 
-            <% if(cl.classdate < today) { %> 
+            <% if(cldate < today) { %> 
                     <%user.class_users.forEach(clu=>{ %>
                         <% if(clu.classeventId == cl.id) {%>     
                         <tr>
