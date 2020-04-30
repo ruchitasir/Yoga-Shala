@@ -13,6 +13,7 @@
         <th>Price</th>
         <th>Cancel Classes</th>
         <th>Edit Classes</th>
+        <th>Students </th>
       </tr>
     </thead>
     <tbody>
@@ -42,6 +43,27 @@
                             <i class="material-icons right">send</i>
                         </button>
                     </form>
+                </td>
+                <td>
+                    <ul class="collapsible pink lighten-3">
+                        <li>
+                          <div class="collapsible-header pink lighten-5"><i class="material-icons">people_outline</i> Students</div>
+                          <div class="collapsible-body">
+                             <% let status = false %>  
+                            <% cl.users.forEach(u=>{ %>
+                                <%if (u.id && !(u.admin)) { %>
+                                  <% status = true %>   
+                                    <ul>
+                                        <li><a class="grey-text text-darken-3" href="/profile/guest/<%=u.id%>"> <%=u.firstname%>  <%=u.lastname %> </a></li>
+                                    </ul> 
+                                <% } %>                                                                  
+                            <% }) %>
+                            <% if (!status) { %>
+                                <ul><li>Nobody signed up!</li></ul>
+                            <% } %>   
+                          </div>
+                        </li>
+                    </ul> 
                 </td>
              </tr>
         <% }) %> 

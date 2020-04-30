@@ -124,7 +124,7 @@ router.get('/show',(req,res)=>{
 
   db.classevent.findAll({
     order: [['classdate','ASC']],
-    include: [ db.instructor, db.location]
+    include: [ db.instructor, db.location, db.user]
   })
   .then(classes=>{
     res.render('class/show',{classes})

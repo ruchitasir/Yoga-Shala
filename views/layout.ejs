@@ -38,6 +38,10 @@
             yearRange: 50,
             maxDate: (new Date())
         })
+
+        var elems3 = document.querySelectorAll('select');
+        var instances3 = M.FormSelect.init(elems3, {}); 
+
         var currentDate = new Date()
         var elems4 = document.querySelectorAll('.dateCurrent')
         var instances4 = M.Datepicker.init(elems4, {
@@ -47,8 +51,8 @@
             yearRange: 50
         })
 
-        var elems3 = document.querySelectorAll('select');
-        var instances3 = M.FormSelect.init(elems3, {}); 
+        var elems5 = document.querySelectorAll('.collapsible');
+        var instances5 = M.Collapsible.init(elems5, {});
     });
     
     $( document ).ready(function() {
