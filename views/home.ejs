@@ -1,7 +1,9 @@
 <header class="w3-display-container w3-content w3-wide" style="max-width:1600px;min-width:500px" id="home">
-    <div class="w3-panel w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border-pale-red w3-pale-red w3-round-xlarge">
+  <!--   <div class="w3-panel w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border-pale-red w3-pale-red w3-round-xlarge">
     <img class="w3-image" src="/image/program-6.jpg" alt="Yoga pose" width="1600" height="800">
-   </div>
+       <img class="w3-image" src="/image/program-6.jpg" alt="Yoga pose" style="background-size: cover;">
+   </div> -->
+   <img class="w3-image" src="/image/bg_1.jpg" alt="Yoga pose" style="background-size: cover;">
     <div class="w3-display-bottomleft w3-padding-large w3-opacity">
       <h1 class="w3-xxlarge">Yoga Shala</h1>
     </div>
@@ -19,9 +21,12 @@
   
       <div class="w3-col m6 w3-padding-large">
         <h1 class="w3-center">About Yoga Shala</h1><br>
-        <h5 class="w3-center">Tradition since 1889</h5>
-        <p class="w3-large">The Catering was founded in blabla by Mr. Smith in lorem ipsum dolor sit amet, consectetur adipiscing elit consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute iruredolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.We only use <span class="w3-tag w3-light-grey">seasonal</span> ingredients.</p>
-        <p class="w3-large w3-text-grey w3-hide-medium">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <h5 class="w3-center">Tradition since 1989</h5>
+        <p class="w3-large">The focus of our center is yoga as taught in the tradition of the world-renowned Yoga Master BKS Iyengar, author of the classic texts, Light on Yoga, Light on Pranayama, Light on the Yoga Sutras of Patanjali, and Light on Life. Iyengar-style hatha yoga is a graceful, precision-oriented approach to yoga that seeks to develop flexibility, strength, stamina, concentration, will power, and relaxation in a balanced way.</p>
+        <p class="w3-large w3-text-grey w3-hide-medium"> The Yoga Shala of Seattle is recognized as one of America's leading Iyengar Style Hatha Yoga Centers with classes being taught in two studios(Yoga Shala, Yoga For You), 50 weeks of the year. Our founder, Samantha Miller is one of the most influential yoga teachers in the Northwestern United States.</p>
+        <h5 class="w3-center"> Are you ready to experience the difference?  </h5> 
+        <h5><a href="/auth/signup">Sign Up for a Class</a></h5>
+        <h5><a href="/class/schedule">View Class Schedule</a></h5>
       </div>
     </div>
 
@@ -48,46 +53,46 @@
         <img class="w3-animate-fading" src="<%=poses[2].img_url%>" alt="<%=poses[2].english_name%>"  style="width:100%">
       </div>
    </div>  
+<!-- Script for animation -->
+  <script>
+  var slideIndex = 0;
+  carousel();
 
-
-
-
-<script>
-var slideIndex = 0;
-carousel();
-
-function carousel() {
-  var i;
-  var x = document.getElementsByClassName("mySlides");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none"; 
+  function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none"; 
+    }
+    slideIndex++;
+    if (slideIndex > x.length) {slideIndex = 1} 
+    x[slideIndex-1].style.display = "block"; 
+    setTimeout(carousel, 3000); 
   }
-  slideIndex++;
-  if (slideIndex > x.length) {slideIndex = 1} 
-  x[slideIndex-1].style.display = "block"; 
-  setTimeout(carousel, 3000); 
-}
-</script>
-      
+  </script>
+        
    <hr>
-    <!-- Menu Section -->
+  
+   
+
+    <!-- Benefits Section -->
     <div class="w3-row w3-padding-64" id="menu">
       <div class="w3-col l6 w3-padding-large">
-        <h1 class="w3-center">Our Menu</h1><br>
-        <h4>Bread Basket</h4>
-        <p class="w3-text-grey">Assortment of fresh baked fruit breads and muffins 5.50</p><br>
+        <h1 class="w3-center"> Iyengar Yoga</h1><br>
+        <h4>About Iyengar Yoga</h4>
+        <p class="w3-text-grey">The attentive and regular practice of yoga postures and breathing exercises is well recognized as being an empowering self-help tool for building and maintaining vibrant health and fostering a feeling of inner balance and attunement.</p><br>
       
-        <h4>Honey Almond Granola with Fruits</h4>
-        <p class="w3-text-grey">Natural cereal of honey toasted oats, raisins, almonds and dates 7.00</p><br>
-      
-        <h4>Belgian Waffle</h4>
-        <p class="w3-text-grey">Vanilla flavored batter with malted flour 7.50</p><br>
-      
-        <h4>Scrambled eggs</h4>
-        <p class="w3-text-grey">Scrambled eggs, roasted red pepper and garlic, with green onions 7.50</p><br>
-      
-        <h4>Blueberry Pancakes</h4>
-        <p class="w3-text-grey">With syrup, butter and lots of berries 8.50</p>    
+        <h4>Benefits of Yoga</h4>
+        <ul class="w3-text-grey">
+          <li>Yoga helps immensely in combating stress </li> 
+          <li>Yoga helps to increase your energy</li>
+          <li>Yoga improves concentration and focus</li>
+          <li>Yoga is empowering </li>
+          <li>Yoga makes you more aware of your body and how to treat it well </li>
+          <li>Yoga gives you concrete relief for back and neck problems </li>
+          <li>Yoga develops a quality of mindfulness which carries over into everyday life  </li>
+          <li>Yoga makes you feel more confident to deal with life  </li>
+        </ul><br>  
       </div>
       
       <div class="w3-col l6 w3-padding-large">
@@ -96,19 +101,29 @@ function carousel() {
     </div>
   
     <hr>
-  
+       <!-- Philosophy Section -->
+    <div class="w3-container w3-padding-64" id="contact">
+      <h1 class="w3-center">Our Philosophy</h1><br>
+      <p class="w3-text-grey w3-large"><b>We believe that yoga is for all. To that end we have created a program where almost anyone can benefit from adding the discipline of yoga to their daily life.</b></p>
+      <p class="w3-text-grey w3-medium">There is immense benefit to the regular practice of the yoga postures known as asanas and the regular practice of yoga breathing exercises known as pranayama.
+      What is special about what we teach and practice, Iyengar Yoga, is that it can be individually adapted to different body types, different ages, to people with common imbalances and limitations. Honestly we can say with over 40 years of practice in this field that this is not true for much of the common "trendy" yoga seen everywhere. But don't take out word for it, come find out yourself how great Iyengar Yoga is
+    </p>
+    </div>  
+    
+    <hr>
     <!-- Contact Section -->
     <div class="w3-container w3-padding-64" id="contact">
       <h1>Contact</h1><br>
-      <p>We offer full-service catering for any event, large or small. We understand your needs and we will cater the food to satisfy the biggerst criteria of them all, both look and taste. Do not hesitate to contact us.</p>
-      <p class="w3-text-blue-grey w3-large"><b>Catering Service, 42nd Living St, 43043 New York, NY</b></p>
-      <p>You can also contact us by phone 00553123-2323 or email catering@catering.com, or you can send us a message here:</p>
-      <form action="/action_page.php" target="_blank">
-        <p><input class="w3-input w3-padding-16" type="text" placeholder="Name" required name="Name"></p>
-        <p><input class="w3-input w3-padding-16" type="number" placeholder="How many people" required name="People"></p>
-        <p><input class="w3-input w3-padding-16" type="datetime-local" placeholder="Date and time" required name="date" value="2017-11-16T20:00"></p>
-        <p><input class="w3-input w3-padding-16" type="text" placeholder="Message \ Special requirements" required name="Message"></p>
-        <p><button class="w3-button w3-light-grey w3-section" type="submit">SEND MESSAGE</button></p>
+      <p>We offer classes all through out the year. If you have any health concerns, please contact us before registering for the classes.
+        We will understand your needs and do the best to help you out in choosing the appropriate classes and building a good, at home yoga practice.</p>
+      <p class="w3-text-blue-grey w3-large"><b>Admission office, 42nd Living St, 98103 Seattle, WA</b></p>
+      <p>You can also contact us by phone 553-123-3023 or email yogashala9@gmail.comcom, or you can send us a message here:</p>
+      <form action="" target="_blank">
+        <p><input class="w3-input w3-padding-16" type="text" placeholder="Name" required name="name"></p>
+        <p><input class="w3-input w3-padding-16" type="text" placeholder="Phone Number" required name="phonenumber"></p>
+        <p><input class="w3-input w3-padding-16" type="text" placeholder="Date" required name="date"> </p>
+        <p><input class="w3-input w3-padding-16" type="text" placeholder="Message \ Special requirements" required name="message"></p>
+        <p><button class="w3-button w3-pale-red w3-section" type="submit">SEND MESSAGE</button></p>
       </form>
     </div>
     
