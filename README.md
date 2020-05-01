@@ -126,10 +126,14 @@ This is an Express app created with the purpose to build a business website for 
 | Method | Path | Purpose |
 |------------|------------------------------|------------------------|
 | GET | '/class/schedule' | Render class schedule page which anyone can see (whether logged in or not) |
-| GET | '/class/new' | Add a new class (by the instructor) |
-| GET | '/class/show' | Render signup form |
-| POST | '/class/show' | Process signup data |
-| GET | '/class/logout' | Remove user from session + redirect |
+| GET | '/class/new' | Page to add a new class (by the instructor) |
+| POST | '/class/show' | Process data when a new class is added |
+| GET | '/class/show' | Render page to view all classes- by instructor (only instructor can see it) as show page |
+| PUT | '/class/show' | Updates the already existing class info by instructor and redirects to show page |
+| GET | '/class/sort' | To filter classes by category for instructor |
+| GET | '/class/sortToday' | To filter classes by category for instructor |
+| DELETE | '/class/:id' |  Delete a particular class- by instructor |
+| GET | '/class/sortToday' | To filter classes by category for instructor |
 
 
 ## Directions For Use
