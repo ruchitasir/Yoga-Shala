@@ -152,7 +152,7 @@ https://yoga-shala.herokuapp.com/
 
 ## Directions For Use
 
-### 1. Clone the repository, but with a different name
+### 1. Fork this repository. Click clone and copy the HTTPS link. On your local choose the directory where you can add this project (cd into the directory of your choice) 
 
 Run the following command on the terminal:
 
