@@ -76,7 +76,19 @@ This is an Express app created with the purpose to build a business website for 
 | address | Text | - |
 | city | Text | - |
 | state | Text | - |
-| zipcode | Integer | Foreign Key |
+| zipcode | Integer | - |
+| createdAt | Date | Automatically added by Sequelize |
+| updatedAt | Date | Automatically added by Sequelize |
+
+**Instructor Model**
+
+|  Column | Type | Notes |
+|----------------|---------------|------------------------|
+| id | Integer | Serial primary key | 
+| firstname | String | - |
+| lastname | String | - |
+| qualifications | Text | - |
+| userId | Integer | - |
 | createdAt | Date | Automatically added by Sequelize |
 | updatedAt | Date | Automatically added by Sequelize |
 
