@@ -16,7 +16,7 @@ This is an Express app created with the purpose to build a business website for 
 * Hashed passwords
 * EJS templating and EJS layouts
 * Sequelize User model
-* Materialize styling- nav and footer,W3CSS Home Page, Google Fonts
+* Materialize styling- nav and footer, W3CSS Home Page, Google Fonts
 * Uses Two APIs: One pulls yoga data and another quotes
 * Models uses N:M, 1:M and also 1:1 reltionships. Classes and Students/Users are in N:M relationship. Their Join table is class_users. This model has 1:M relationship with class and user/student where one class has multiple entries in class_user table. Location and Instructor table have 1:1 relationships respectively with class.
 
