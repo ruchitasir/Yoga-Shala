@@ -110,7 +110,7 @@ router.put('/show',(req,res)=>{
     returning : true
   })
   .then(([row,cl])=>{
-    console.log("put route class",cl)
+   // console.log("put route class",cl)
     res.redirect('/class/show')
   })
   .catch(err=>{
@@ -187,7 +187,7 @@ router.get('/registerclass',(req,res)=>{
     if(Object.keys(classes).length){
        msg = true;
     }
-    console.log('classes: register',classes)
+    //console.log('classes: register',classes)
     res.render('class/registerclass',{classes, msg})
   })
   .catch(err=>{
@@ -199,19 +199,32 @@ router.get('/registerclass',(req,res)=>{
 
 //Add users to a particular class
 router.post('/userclass',(req,res)=>{
- // console.log(req.body)
+  console.log(req.body)
   db.classevent.findOne({
-    where: {id: req.body.id}
+    where: {id: req.body.classeventId}
   })
   .then(cl=>{
     cl.addUser(req.body.userId)
       .then(()=>{
-          res.redirect('/class/userclass')
-      })
-      .catch(err=>{
-        console.log(err)
-        res.render('error')
-      })
+                    db.class_user.update(req.body,{
+                      where: { 
+                        userId: req.body.userId,
+                        classeventId: req.body.classeventId
+                      },
+                      returning : true
+                    })
+                    .then(([row,clu])=>{
+                      res.redirect('/class/userclass')
+                    })
+                    .catch(err=>{
+                      console.log(err)
+                      res.render('error')
+                    })
+                })
+              .catch(err=>{
+                console.log(err)
+                res.render('error')
+              })
   })
   .catch(err=>{
     console.log(err)
@@ -227,18 +240,6 @@ router.get('/userclass',(req,res)=>{
     include: [db.classevent, db.class_user]
   })
   .then(user=>{
-   // console.log("user class ", user.dataValues.classevents[0])
-   /*  let clObjs = [];
-      user.dataValues.classevents.forEach(cl=>{
-         db.classevent.findOne({ 
-          where: {id: cl.dataValues.id},
-          include: [db.instructor,db.location]
-        }).then(clObj=>{
-          console.log("CL ob",clObj.dataValues)
-          clObjs.push(clObj.dataValues)
-        })      
-      })
-      console.log("CLASS OBJS", clObjs) */
     res.render('class/userclass',{user,msg})
   })
   .catch(err=>{

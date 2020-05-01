@@ -29,9 +29,9 @@
               
             <td>
                 <form  method="POST" action="/class/userclass">
-                    <input id="classid" type="hidden" name="id" value="<%=cl.id%>">
+                    <input id="classid" type="hidden" name="classeventId" value="<%=cl.id%>">
                     <input id="userid" type="hidden" name="userId" value="<%=user.id%>">
-                   
+                    <input id="registerCancel" type="hidden" name="registerCancel" value="register">
                     <% let status = true %> 
                     <% cl.class_users.forEach(u=>{ %>
                         <% if(u.userId === user.id && u.registerCancel== "register") { status = false; %>
