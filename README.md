@@ -129,12 +129,17 @@ This is an Express app created with the purpose to build a business website for 
 | GET | '/class/new' | Page to add a new class (by the instructor) |
 | POST | '/class/show' | Process data when a new class is added |
 | GET | '/class/show' | Render page to view all classes- by instructor (only instructor can see it) as show page |
+| GET | '/class/:id' | Render page to edit the class info- by instructor |
 | PUT | '/class/show' | Updates the already existing class info by instructor and redirects to show page |
 | GET | '/class/sort' | To filter classes by category for instructor |
 | GET | '/class/sortToday' | To filter classes by category for instructor |
 | DELETE | '/class/:id' |  Delete a particular class- by instructor |
-| GET | '/class/sortToday' | To filter classes by category for instructor |
-
+| GET | '/class/registerclass' | Page for student to see all the classes and register |
+| POST | '/class/userclass' | Register the student to a class |
+| GET | '/class/userclass' | Show thw student/user his classes (registered) |
+| GET | '/class/userUpcoming' | Filter the classes of a student by category |
+| GET | '/class/userHistory' | Filter the classes of a student by category |
+| PUT | '/class/cancel' | Process data when user cancels a class |
 
 ## Directions For Use
 
