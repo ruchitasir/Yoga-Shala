@@ -120,6 +120,18 @@ This is an Express app created with the purpose to build a business website for 
 | GET | '/profile/admin' | Show admin dashboard (authorized admin only) |
 | GET | '/profile/guest/:id' | View user dashboard as guest (authorized user only) |
 
+
+**Routes in controllers/class.js**
+
+| Method | Path | Purpose |
+|------------|------------------------------|------------------------|
+| GET | '/class/schedule' | Render class schedule page which anyone can see (whether logged in or not) |
+| GET | '/class/new' | Add a new class (by the instructor) |
+| GET | '/class/show' | Render signup form |
+| POST | '/class/show' | Process signup data |
+| GET | '/class/logout' | Remove user from session + redirect |
+
+
 ## Directions For Use
 
 ### 1. Clone the repository, but with a different name
