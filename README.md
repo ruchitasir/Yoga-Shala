@@ -26,9 +26,29 @@ This is a boilerplate for an Express app with local user authentication. It exit
 | admin | Boolean | Defaulted to False |
 | pic | String | - |
 | bio | Text | - |
+| address | Text | - |
+| city | Text | - |
+| state | Text | - |
+| zipcode | Integer | - |
 | createdAt | Date | Automatically added by Sequelize |
 | updatedAt | Date | Automatically added by Sequelize |
 
+
+**Classevent Model**
+
+|  Column | Type | Notes |
+|----------------|---------------|------------------------|
+| id | Integer | Serial primary key | 
+| classname | String | - |
+| classtype | String | - |
+| date | Date | - |
+| starttime | String | - |
+| endtime | String | - |
+| price | Float | - |
+| instructorId | Integer | Foreign Key |
+| locationId | Integer | Foreign Key |
+| createdAt | Date | Automatically added by Sequelize |
+| updatedAt | Date | Automatically added by Sequelize |
 
 ## Included Routes
 
