@@ -1,5 +1,10 @@
 # Yoga-Shala
-This is a boilerplate for an Express app with local user authentication. It exits so I have a customized boilerplate and don't have to start from scratch on all my projects.
+This is an Express app created with the purpose to build a business website for a yoga instructor. It simulates some of the core functionalities of a business website. 
+
+## Functionalities 
+* Here students can register and see all their classes once they create an account on the website. Their account is personalized in a unique way so that when they register for any class, they will know if they have already registered for it. They can customize the view of a particular set of class which they have registered by filters. Their profile page is beautifully designed with a different inspiration quote to see everytime they login. They have the ability to cancel their classes.
+* 
+
 
 ## What It Includes
 
@@ -13,7 +18,7 @@ This is a boilerplate for an Express app with local user authentication. It exit
 
 ## Included Models
 
-**User Model**
+**User/Student Model**
 
 |  Column | Type | Notes |
 |----------------|---------------|------------------------|
