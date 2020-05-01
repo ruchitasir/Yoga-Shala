@@ -232,6 +232,7 @@ router.post('/userclass',(req,res)=>{
   })
 })
 
+// show thw student/user his classes (registered)
 router.get('/userclass',(req,res)=>{
   let msg= "";
   let userId = res.locals.user.dataValues.id;

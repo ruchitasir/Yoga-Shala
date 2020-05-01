@@ -34,7 +34,7 @@
             <% let res1 = cl.endtime.split(":")[0] %>    
             <% let str1 = "am"; if(res1 >=12) { str1 = "pm" }%>  
             <% let cldate = cl.classdate; cldate.setHours(0, 0, 0, 0); %>   
-            <% if(cldate.getTime()== today.getTime()) { %> 
+            <% if(cldate.toDateString() == today.toDateString()) { %> 
                 <tr>
                     <td><%=cl.classdate.toDateString()%></td>
                     <td><strong><%=cl.classtype%> </strong></td>
