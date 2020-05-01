@@ -72,7 +72,6 @@ app.get('/',(req,res)=>{
 
  // create a wildcard route
 app.get('*',(req,res)=>{
-    //res.send("This matches literally anything, great spot for an error page")
     res.render('error');
 })
 

@@ -4,11 +4,10 @@ let db = require('../models')
 let passport = require('../config/passportConfig')
 let Sequelize = require('sequelize')
 let userLogin = require('../middleware/userLogin')
-//let poses = require('../yoga_api.json')
 let fs = require('fs');
 
 
-
+//Render class schedule page which anyone can see (whether logged in or not)
 router.get('/schedule',(req,res)=>{
   const Op = Sequelize.Op
  let today = new Date();
@@ -33,12 +32,15 @@ router.get('/schedule',(req,res)=>{
   })
 
 })
+/*************************************************************************************************/
 
 //Custom middleware that is Only applied to this route in this file
 //this one applies to the entire router
 router.use(userLogin)
+/*************************************************************************************************/
+// INSTRUCTOR ACTIONS
 
-
+// function to pop up time slots in the drop down menu
 function timeslot(){
   let starttimeSlots =[];
   let endtimeSlots =[];
@@ -61,7 +63,7 @@ function timeslot(){
 }
 
 
-
+// Render page to add a new class (by the instructor)
 router.get('/new',(req,res)=>{
   let timeSlot = timeslot()
      db.instructor.findAll()
@@ -81,9 +83,8 @@ router.get('/new',(req,res)=>{
       })
 })
 
-
+// Adds a new class to the database but avoids any duplicate and render the page to the instructor to show all the classes
 router.post('/show',(req,res)=>{
-  //console.log(req.body)
   db.classevent.findOrCreate({
     where: {
       classdate: req.body.classdate,
@@ -103,6 +104,7 @@ router.post('/show',(req,res)=>{
   
 })
 
+//Updates the already existing class info by instructor
 router.put('/show',(req,res)=>{
   //console.log(req.body)
   db.classevent.update(req.body,{
@@ -110,7 +112,6 @@ router.put('/show',(req,res)=>{
     returning : true
   })
   .then(([row,cl])=>{
-   // console.log("put route class",cl)
     res.redirect('/class/show')
   })
   .catch(err=>{
@@ -120,6 +121,7 @@ router.put('/show',(req,res)=>{
 
 })
 
+// Render page to view all classes by instructor (only instructor can see it) as show page
 router.get('/show',(req,res)=>{
 
   db.classevent.findAll({
@@ -136,7 +138,7 @@ router.get('/show',(req,res)=>{
 
 })
 
-//Classes to show by category for instructor
+//To show classes by category for instructor
 router.get('/sort',(req,res)=>{
 
   db.classevent.findAll({
@@ -154,7 +156,7 @@ router.get('/sort',(req,res)=>{
 })
 
 
-//Classes to show for today for instructor
+//Classes to show (for today) for instructor
 router.get('/sortToday',(req,res)=>{
 
   db.classevent.findAll({
@@ -171,7 +173,10 @@ router.get('/sortToday',(req,res)=>{
  
 })
 
+/*************************************************************************************************/
+// USER/STUDENT ACTIONS
 
+// A page for student to see all the classes and register
 router.get('/registerclass',(req,res)=>{
   const Op = Sequelize.Op
   let today = new Date();
@@ -187,7 +192,6 @@ router.get('/registerclass',(req,res)=>{
     if(Object.keys(classes).length){
        msg = true;
     }
-    //console.log('classes: register',classes)
     res.render('class/registerclass',{classes, msg})
   })
   .catch(err=>{
@@ -197,7 +201,7 @@ router.get('/registerclass',(req,res)=>{
 
 })
 
-//Add users to a particular class
+//Add students to a particular class
 router.post('/userclass',(req,res)=>{
   console.log(req.body)
   db.classevent.findOne({
@@ -250,6 +254,7 @@ router.get('/userclass',(req,res)=>{
  
 })
 
+// filter the classes of a student by category, student sees all the future classes
 router.get('/userUpcoming',(req,res)=>{
   let msg = "upcoming";
 
@@ -268,6 +273,7 @@ router.get('/userUpcoming',(req,res)=>{
   
 })
 
+// filter the classes of a student by category, student sees the history of classes
 router.get('/userHistory',(req,res)=>{
   let msg = "history";
 
@@ -286,7 +292,7 @@ router.get('/userHistory',(req,res)=>{
   
 })
 
-//User cannot attend the class so need to update the daatabase to change the flag to cancel
+//User cannot attend the class so need to update the database to change the flag to cancel
  router.put('/cancel',(req,res)=>{
 
   db.class_user.update(req.body,{
@@ -306,65 +312,68 @@ router.get('/userHistory',(req,res)=>{
     
  })
 
-router.get('/:id',(req,res)=>{
-  let timeSlot = timeslot()
-  db.classevent.findOne({
-    where: {id: req.params.id},
-    include: [db.instructor, db.location]
-  })
-  .then(cl=>{
-    db.instructor.findAll()
-    .then(instructors=>{
-        db.location.findAll()
-        .then(locations=>{
-          res.render('class/edit',{ cl, instructors, locations, timeSlot })
-        })
-        .catch(err=>{
-          console.log(err)
-          res.render('error')
-        })
-    })
-    .catch(err=>{
-      console.log(err)
-      res.render('error')
-    })   
-    
-  })
-  .catch(err=>{
-    console.log(err)
-    res.render('error')
-  })
-    
-  
+ // Edit page for the instructor to update the class info
+ router.get('/:id',(req,res)=>{	
+  let timeSlot = timeslot()	
+  db.classevent.findOne({	
+    where: {id: req.params.id},	
+    include: [db.instructor, db.location]	
+  })	
+  .then(cl=>{	
+    db.instructor.findAll()	
+    .then(instructors=>{	
+        db.location.findAll()	
+        .then(locations=>{	
+          res.render('class/edit',{ cl, instructors, locations, timeSlot })	
+        })	
+        .catch(err=>{	
+          console.log(err)	
+          res.render('error')	
+        })	
+    })	
+    .catch(err=>{	
+      console.log(err)	
+      res.render('error')	
+    })   	
+
+  })	
+  .catch(err=>{	
+    console.log(err)	
+    res.render('error')	
+  })	
+
+
+})	
+
+// Delete a particular class by instructor
+router.delete('/:id', (req,res) => {	
+
+  // delete the relation first	
+  db.class_user.destroy({	
+    where: { classeventId: req.params.id }	
+  })	
+  .then(() => {	
+    // Now I am free to delete the class itself	
+    db.classevent.destroy({	
+      where: { id: req.params.id }	
+    })	
+    .then(cancelledClass => {	
+      res.redirect('/class/show')	
+    })	
+    .catch(err => {	
+      console.log('Oh no what happened', err)	
+      res.render('main/404')	
+    })	
+  })	
+  .catch(err => {	
+    console.log('Oh no what happened', err)	
+    res.render('main/404')	
+  }) 	
+
+
 })
 
 
-router.delete('/:id', (req,res) => {
- 
-  // delete the relation first
-  db.class_user.destroy({
-    where: { classeventId: req.params.id }
-  })
-  .then(() => {
-    // Now I am free to delete the class itself
-    db.classevent.destroy({
-      where: { id: req.params.id }
-    })
-    .then(cancelledClass => {
-      res.redirect('/class/show')
-    })
-    .catch(err => {
-      console.log('Oh no what happened', err)
-      res.render('main/404')
-    })
-  })
-  .catch(err => {
-    console.log('Oh no what happened', err)
-    res.render('main/404')
-  }) 
-
-  
-})
 
 //Export (allow me to include this in another page)
 module.exports = router;
