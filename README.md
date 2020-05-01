@@ -56,6 +56,31 @@ This is an Express app created with the purpose to build a business website for 
 | createdAt | Date | Automatically added by Sequelize |
 | updatedAt | Date | Automatically added by Sequelize |
 
+**Class-User Model**
+
+|  Column | Type | Notes |
+|----------------|---------------|------------------------|
+| id | Integer | Serial primary key | 
+| classeventId | Integer | Foreign Key |
+| userId | Integer | Foreign Key |
+| registerCancel | Text | - |
+| createdAt | Date | Automatically added by Sequelize |
+| updatedAt | Date | Automatically added by Sequelize |
+
+**Location Model**
+
+|  Column | Type | Notes |
+|----------------|---------------|------------------------|
+| id | Integer | Serial primary key | 
+| centername | Text | - |
+| address | Text | - |
+| city | Text | - |
+| state | Text | - |
+| zipcode | Integer | Foreign Key |
+| createdAt | Date | Automatically added by Sequelize |
+| updatedAt | Date | Automatically added by Sequelize |
+
+
 ## Included Routes
 
 **Routes in Index**
