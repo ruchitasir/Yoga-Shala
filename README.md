@@ -1,5 +1,11 @@
 # Yoga-Shala
-This is a boilerplate for an Express app with local user authentication. It exits so I have a customized boilerplate and don't have to start from scratch on all my projects.
+This is an Express app created with the purpose to build a business website for a yoga instructor. It simulates some of the core functionalities of a business website. 
+
+## Functionalities 
+* Home page with all the info about the yoga center and the Class Schedule page are open to view by all. For everything else,  one has to login. Website has security features through which it authenticates a user and this functionality is achieved by passport and session maintenance.
+* Here students can register and see all their classes once they create an account on the website. Their account is personalized in a unique way so that when they register for any class, they will know if they have already registered for it. They can customize the view of a particular set of class which they have registered by filters. Their profile page is beautifully designed with a different inspiration quote to see everytime they login. They have the ability to cancel their classes and they can also see the ones they cancelled.
+* Instructors can view, add, cancel and update classes. They can see all the students who have registered for each class and those who have cancelled it. The GUI is very user friendly to perform all the operations. Another unique feature of this web-app is that instructors can also sort the classes using filters to see a particular set of classes.
+
 
 ## What It Includes
 
@@ -13,7 +19,7 @@ This is a boilerplate for an Express app with local user authentication. It exit
 
 ## Included Models
 
-**User Model**
+**User/Student Model**
 
 |  Column | Type | Notes |
 |----------------|---------------|------------------------|
@@ -26,6 +32,63 @@ This is a boilerplate for an Express app with local user authentication. It exit
 | admin | Boolean | Defaulted to False |
 | pic | String | - |
 | bio | Text | - |
+| address | Text | - |
+| city | Text | - |
+| state | Text | - |
+| zipcode | Integer | - |
+| createdAt | Date | Automatically added by Sequelize |
+| updatedAt | Date | Automatically added by Sequelize |
+
+
+**Classevent Model**
+
+|  Column | Type | Notes |
+|----------------|---------------|------------------------|
+| id | Integer | Serial primary key | 
+| classname | String | - |
+| classtype | String | - |
+| date | Date | - |
+| starttime | String | - |
+| endtime | String | - |
+| price | Float | - |
+| instructorId | Integer | Foreign Key |
+| locationId | Integer | Foreign Key |
+| createdAt | Date | Automatically added by Sequelize |
+| updatedAt | Date | Automatically added by Sequelize |
+
+**Class-User Model**
+
+|  Column | Type | Notes |
+|----------------|---------------|------------------------|
+| id | Integer | Serial primary key | 
+| classeventId | Integer | Foreign Key |
+| userId | Integer | Foreign Key |
+| registerCancel | Text | - |
+| createdAt | Date | Automatically added by Sequelize |
+| updatedAt | Date | Automatically added by Sequelize |
+
+**Location Model**
+
+|  Column | Type | Notes |
+|----------------|---------------|------------------------|
+| id | Integer | Serial primary key | 
+| centername | Text | - |
+| address | Text | - |
+| city | Text | - |
+| state | Text | - |
+| zipcode | Integer | - |
+| createdAt | Date | Automatically added by Sequelize |
+| updatedAt | Date | Automatically added by Sequelize |
+
+**Instructor Model**
+
+|  Column | Type | Notes |
+|----------------|---------------|------------------------|
+| id | Integer | Serial primary key | 
+| firstname | String | - |
+| lastname | String | - |
+| qualifications | Text | - |
+| userId | Integer | - |
 | createdAt | Date | Automatically added by Sequelize |
 | updatedAt | Date | Automatically added by Sequelize |
 
@@ -56,6 +119,27 @@ This is a boilerplate for an Express app with local user authentication. It exit
 | GET | '/profile/user' | Show user dashboard (authorized user only) |
 | GET | '/profile/admin' | Show admin dashboard (authorized admin only) |
 | GET | '/profile/guest/:id' | View user dashboard as guest (authorized user only) |
+
+
+**Routes in controllers/class.js**
+
+| Method | Path | Purpose |
+|------------|------------------------------|------------------------|
+| GET | '/class/schedule' | Render class schedule page which anyone can see (whether logged in or not) |
+| GET | '/class/new' | Page to add a new class (by the instructor) |
+| POST | '/class/show' | Process data when a new class is added |
+| GET | '/class/show' | Render page to view all classes- by instructor (only instructor can see it) as show page |
+| GET | '/class/:id' | Render page to edit the class info- by instructor |
+| PUT | '/class/show' | Updates the already existing class info by instructor and redirects to show page |
+| GET | '/class/sort' | To filter classes by category for instructor |
+| GET | '/class/sortToday' | To filter classes by category for instructor |
+| DELETE | '/class/:id' |  Delete a particular class- by instructor |
+| GET | '/class/registerclass' | Page for student to see all the classes and register |
+| POST | '/class/userclass' | Register the student to a class |
+| GET | '/class/userclass' | Show thw student/user his classes (registered) |
+| GET | '/class/userUpcoming' | Filter the classes of a student by category |
+| GET | '/class/userHistory' | Filter the classes of a student by category |
+| PUT | '/class/cancel' | Process data when user cancels a class |
 
 ## Directions For Use
 
