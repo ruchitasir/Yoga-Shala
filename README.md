@@ -1,6 +1,12 @@
 # Yoga-Shala
 This is an Express app created with the purpose to build a business website for a yoga instructor. It simulates some of the core functionalities of a business website. 
 
+### Application is deployed at: 
+```sh
+https://yoga-shala.herokuapp.com/
+```
+
+
 ## Functionalities 
 * Home page with all the info about the yoga center and the Class Schedule page are open to view by all. For everything else,  one has to login. Website has security features through which it authenticates a user and this functionality is achieved by passport and session maintenance.
 * Here students can register and see all their classes once they create an account on the website. Their account is personalized in a unique way so that when they register for any class, they will know if they have already registered for it. They can customize the view of a particular set of class which they have registered by filters. Their profile page is beautifully designed with a different inspiration quote to see everytime they login. They have the ability to cancel their classes and they can also see the ones they cancelled.
