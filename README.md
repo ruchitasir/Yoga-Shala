@@ -5,7 +5,7 @@ This is an Express app created with the purpose to build a business website for 
 * Home page with all the info about the yoga center and the Class Schedule page are open to view by all. For everything else,  one has to login. Website has security features through which it authenticates a user and this functionality is achieved by passport and session maintenance.
 * Here students can register and see all their classes once they create an account on the website. Their account is personalized in a unique way so that when they register for any class, they will know if they have already registered for it. They can customize the view of a particular set of class which they have registered by filters. Their profile page is beautifully designed with a different inspiration quote to see everytime they login. They have the ability to cancel their classes and they can also see the ones they cancelled.
 * Instructors can view, add, cancel and update classes. They can see all the students who have registered for each class and those who have cancelled it. The GUI is very user friendly to perform all the operations. Another unique feature of this web-app is that instructors can also sort the classes using filters to see a particular set of classes.
-* Fully responsive, mobile-friendly website
+* Fully responsive, mobile-friendly website.
 
 
 ## What It Includes
