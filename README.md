@@ -1,5 +1,5 @@
 # Yoga-Shala
-This is an Express app created with the purpose to build a business website for a yoga instructor. It simulates some of the core functionalities of a business website. 
+This is a full-stack app, developed using Express and Node.js and created with the purpose to learn building a business website. This business website is specifically meant to serve the yoga instructors. I attempted to recreate the website of my yoga instructor. It simulates some of the core functionalities of his business website. 
 
 ### Application is deployed at: 
 ```sh
