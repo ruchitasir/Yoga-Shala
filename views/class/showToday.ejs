@@ -36,7 +36,6 @@
             <% let cldate = cl.classdate; cldate.setHours(0, 0, 0, 0); %>   
            
             <% if(cldate.toDateString() == today.toDateString()) { %> 
-                Cldate<%=cldate.toDateString()  %> Todays<%=today.toDateString()  %> 
                 <tr>
                     <td><%=cl.classdate.toDateString()%></td>
                     <td><strong><%=cl.classtype%> </strong></td>
