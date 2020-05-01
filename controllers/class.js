@@ -104,39 +104,6 @@ router.post('/show',(req,res)=>{
   
 })
 
-// Edit page for the instructor to update the class info
-router.get('/:id',(req,res)=>{
-  let timeSlot = timeslot()
-  db.classevent.findOne({
-    where: {id: req.params.id},
-    include: [db.instructor, db.location]
-  })
-  .then(cl=>{
-    db.instructor.findAll()
-    .then(instructors=>{
-        db.location.findAll()
-        .then(locations=>{
-          res.render('class/edit',{ cl, instructors, locations, timeSlot })
-        })
-        .catch(err=>{
-          console.log(err)
-          res.render('error')
-        })
-    })
-    .catch(err=>{
-      console.log(err)
-      res.render('error')
-    })   
-    
-  })
-  .catch(err=>{
-    console.log(err)
-    res.render('error')
-  })
-    
-})
-
-
 //Updates the already existing class info by instructor
 router.put('/show',(req,res)=>{
   //console.log(req.body)
@@ -204,31 +171,6 @@ router.get('/sortToday',(req,res)=>{
     res.render('error')
   })
  
-})
-
-// Delete a particular class by instructor
-router.delete('/:id', (req,res) => { 
-  // delete the relation first
-  db.class_user.destroy({
-    where: { classeventId: req.params.id }
-  })
-  .then(() => {
-    // Now I am free to delete the class itself
-    db.classevent.destroy({
-      where: { id: req.params.id }
-    })
-    .then(cancelledClass => {
-      res.redirect('/class/show')
-    })
-    .catch(err => {
-      console.log('Oh no what happened', err)
-      res.render('main/404')
-    })
-  })
-  .catch(err => {
-    console.log('Oh no what happened', err)
-    res.render('main/404')
-  }) 
 })
 
 /*************************************************************************************************/
@@ -369,6 +311,67 @@ router.get('/userHistory',(req,res)=>{
   })
     
  })
+
+ // Edit page for the instructor to update the class info
+ router.get('/:id',(req,res)=>{	
+  let timeSlot = timeslot()	
+  db.classevent.findOne({	
+    where: {id: req.params.id},	
+    include: [db.instructor, db.location]	
+  })	
+  .then(cl=>{	
+    db.instructor.findAll()	
+    .then(instructors=>{	
+        db.location.findAll()	
+        .then(locations=>{	
+          res.render('class/edit',{ cl, instructors, locations, timeSlot })	
+        })	
+        .catch(err=>{	
+          console.log(err)	
+          res.render('error')	
+        })	
+    })	
+    .catch(err=>{	
+      console.log(err)	
+      res.render('error')	
+    })   	
+
+  })	
+  .catch(err=>{	
+    console.log(err)	
+    res.render('error')	
+  })	
+
+
+})	
+
+// Delete a particular class by instructor
+router.delete('/:id', (req,res) => {	
+
+  // delete the relation first	
+  db.class_user.destroy({	
+    where: { classeventId: req.params.id }	
+  })	
+  .then(() => {	
+    // Now I am free to delete the class itself	
+    db.classevent.destroy({	
+      where: { id: req.params.id }	
+    })	
+    .then(cancelledClass => {	
+      res.redirect('/class/show')	
+    })	
+    .catch(err => {	
+      console.log('Oh no what happened', err)	
+      res.render('main/404')	
+    })	
+  })	
+  .catch(err => {	
+    console.log('Oh no what happened', err)	
+    res.render('main/404')	
+  }) 	
+
+
+})
 
 
 
