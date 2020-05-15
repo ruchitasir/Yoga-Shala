@@ -1,5 +1,11 @@
 # Yoga-Shala
-This is an Express app created with the purpose to build a business website for a yoga instructor. It simulates some of the core functionalities of a business website. 
+This is a full-stack app, developed using Express and Node.js and created with the purpose to learn building a business website. This business website is specifically meant to serve the yoga instructors. I attempted to recreate the website of my yoga instructor. It simulates some of the core functionalities of his business website. 
+
+### Application is deployed at: 
+```sh
+https://yoga-shala.herokuapp.com/
+```
+
 
 ## Functionalities 
 * Home page with all the info about the yoga center and the Class Schedule page are open to view by all. For everything else,  one has to login. Website has security features through which it authenticates a user and this functionality is achieved by passport and session maintenance.
@@ -146,7 +152,7 @@ This is an Express app created with the purpose to build a business website for 
 
 ## Directions For Use
 
-### 1. Clone the repository, but with a different name
+### 1. Fork this repository. Click clone and copy the HTTPS link. On your local choose the directory where you can add this project (cd into the directory of your choice). If you would like to use this project for reference for your own project then just clone it.
 
 Run the following command on the terminal:
 
@@ -165,7 +171,7 @@ git clone https://github.com/ruchitasir/node-auth-boiler.git my-new-project
 npm i
 ```
 
-### 3. Customize the new project
+### 3. Customize the new project if you would like to use this project as a reference for your website
 
 Remove defaulty stuff. For example:
 
@@ -191,7 +197,7 @@ createdb my_new_db
 
 In `config/config.json`, update the database name to the one created in step 4. Other settings likely okay, but check username, password and dialect.
 
-### 6. Check user model for relevance to new project's needs
+### 6. Create user models as specified above or create the ones relevant to your project's needs
 
 For example, if the new project doesn't need a birthday field, then delete it from the user model and user migration files.
 
@@ -226,7 +232,9 @@ nodemon
 node index.js
 ```
 
-### 10. Delete the origin that points to the boilerplate repository
+## Steps 10-12 are applicable if you have only cloned this repository and not forked it. If you have forked it, you can run the git command to push all your changes to your forked repository on GitHub website.
+
+### 10. Delete the origin that points to this repository
 
 Currently if we run this command:
 
@@ -253,7 +261,7 @@ git remote add origin <new_repo_link>
 git push origin master
 ```
 
-**Happy developing!**
+**Enjoy running this project and happy developing for your own project!**
 
 
 
