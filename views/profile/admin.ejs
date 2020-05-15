@@ -1,6 +1,8 @@
 <h1>Admin Profile  <%=user.firstname  %> </h1> 
 <div class="row">
-    <h2>Quote of the day: "<%= quote.quoteText %>"</h2>
+    <% if(quote) { %>
+         <h3>"<%= quote %>"</h3>
+    <% } %> 
 </div>
 
 <div class="row">

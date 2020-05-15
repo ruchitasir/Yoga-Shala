@@ -65,22 +65,31 @@ function timeslot(){
 
 // Render page to add a new class (by the instructor)
 router.get('/new',(req,res)=>{
-  let timeSlot = timeslot()
-     db.instructor.findAll()
-    .then(instructors=>{
-        db.location.findAll()
-        .then(locations=>{
-          res.render('class/new', { instructors, locations,timeSlot })
+      let ifAdmin= res.locals.user.dataValues.admin
+      //console.log("user", res.locals.user.dataValues)
+      //console.log("admin",ifAdmin)
+      if(ifAdmin){
+        let timeSlot = timeslot()
+        db.instructor.findAll()
+      .then(instructors=>{
+          db.location.findAll()
+          .then(locations=>{
+            res.render('class/new', { instructors, locations,timeSlot })
+          })
+          .catch(err=>{
+            console.log(err)
+            res.render('error')
+          }) 
         })
         .catch(err=>{
           console.log(err)
           res.render('error')
-        }) 
-      })
-      .catch(err=>{
-        console.log(err)
-        res.render('error')
-      })
+        })
+      }
+      else {
+        res.redirect('/profile/user')
+      }
+  
 })
 
 // Adds a new class to the database but avoids any duplicate and render the page to the instructor to show all the classes
